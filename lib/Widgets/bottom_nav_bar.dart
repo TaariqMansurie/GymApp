@@ -21,16 +21,16 @@ class BottomNavBar extends StatelessWidget {
         children: <Widget>[
           BottomNavItem(
             title: "Today",
-            svgScr: "assets/icons/calendar.svg",
+            svgScr: "assets/calendar.svg",
           ),
           BottomNavItem(
             title: "All Exercises",
-            svgScr: "assets/icons/gym.svg",
+            svgScr: "assets/gym.svg",
             isActive: true,
           ),
           BottomNavItem(
             title: "Settings",
-            svgScr: "assets/icons/Settings.svg",
+            svgScr: "assets/Settings.svg",
           ),
         ],
       ),

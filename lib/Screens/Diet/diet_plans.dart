@@ -1,7 +1,7 @@
-import 'file:///C:/Users/taari/GymApp/lib/Screens/Diet/diet.dart';
-import 'package:GymApp/shared/constants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 import 'diet_category.dart';
@@ -23,7 +23,8 @@ class _DietPlansState extends State<DietPlans> {
             id: 1,
             name: 'Yearly Plan',
             price: 50,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/pizza-1.png',
+            lock : FontAwesomeIcons.lock)
       //   DietItem(
       //       id: 2,
       //       name: 'Greek Shaurama',
@@ -40,27 +41,27 @@ class _DietPlansState extends State<DietPlans> {
             id: 2,
             name: 'High Protein Meal',
             price: 12.99,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/pizza-2.png'),
         DietItem(
             id: 3,
             name: 'Keto Meal',
             price: 12.99,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hotdog.png'),
         DietItem(
             id: 4,
             name: 'Vegan Meal',
             price: 13.50,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hotdog.png'),
         DietItem(
             id: 5,
             name: 'Mexican Meal',
             price: 12.99,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hotdog.png'),
         DietItem(
             id: 6,
             name: 'Low Carbs Meal',
             price: 12.99,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hamburger.png'),
       ],
     ),
     Category(
@@ -71,17 +72,17 @@ class _DietPlansState extends State<DietPlans> {
             id: 7,
             name: 'Monthly Plan',
             price: 15.00,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hamburger.png'),
         DietItem(
             id: 8,
             name: 'Quarterly Plan',
             price: 35.00,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hamburger.png'),
         DietItem(
             id: 1,
             name: 'Yearly Plan',
             price: 50.00,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hamburger.png'),
       ],
     ),
     Category(
@@ -92,17 +93,17 @@ class _DietPlansState extends State<DietPlans> {
             id: 7,
             name: 'Monthly Plan',
             price: 15.00,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hamburger.png'),
         DietItem(
             id: 8,
             name: 'Quarterly Plan',
             price: 35.00,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hamburger.png'),
         DietItem(
             id: 1,
             name: 'Yearly Plan',
             price: 50.00,
-            imagePath: 'assets/images/hamburger.png'),
+            imagePath: 'assets/hamburger.png'),
       ],
       //yearly plan
     ),
@@ -242,7 +243,9 @@ class _DietPlansState extends State<DietPlans> {
         backgroundColor: Colors.deepPurple[500] ,
         leading: IconButton(
           icon: Icon(FontAwesomeIcons.arrowCircleLeft),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context) ;
+          },
           color: Colors.black,
           tooltip: 'Back',
         ),
@@ -254,8 +257,9 @@ class _DietPlansState extends State<DietPlans> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Image.asset(
-              'assets/images/Chef.gif',
+              'assets/Chef.gif',
               height: 250,
+
             ),
             Expanded(
               child: Container(

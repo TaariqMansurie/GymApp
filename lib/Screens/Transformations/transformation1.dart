@@ -25,7 +25,7 @@ class SuperTransformation1 extends StatelessWidget {
               backgroundColor: Colors.deepPurple[400],
               expandedHeight: 350.0,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset('apple.png'),
+                background: Image.asset('assets/apple.png'),
               ),
             ),
             SliverFixedExtentList(
@@ -35,12 +35,15 @@ class SuperTransformation1 extends StatelessWidget {
                 Text('BEst ST till date in 5 months'),
                 buildImageCard(),
                 SizedBox(height: 15.0,),
+               // buildImageCard(),
+                buildQuoteCard(),
+                SizedBox(height: 15.0,),
+                buildRoundedCard(),
+                SizedBox(height: 15.0,),
+                buildColoredCard(),
+              // buildImageInteractionCard(),
                 Text('ST1'),
-                Text('ST1'),
-                Text('ST1'),
-                Text('ST1'),
-                Text('ST1'),
-                Text('ST1'),
+                SizedBox(height: 15.0,),
                 Text('ST1'),
               ]),
             )
@@ -169,7 +172,7 @@ class SuperTransformation1 extends StatelessWidget {
   Widget buildImageInteractionCard() => Card(
     clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(20),
     ),
     child: Column(
       children: [

@@ -53,7 +53,7 @@ class  UserNavigationDrawer extends StatelessWidget {
                               child :CircleAvatar(
                                 child: Text(''),
                                 backgroundImage: profile_pic_url == null
-                                    ? AssetImage('assets/search.png')
+                                    ? AssetImage('assets/apple.png')
                                     : NetworkImage(profile_pic_url),
                               ),
                             ),

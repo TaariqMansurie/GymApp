@@ -1,9 +1,7 @@
-
+import 'package:GymApp/Screens/BMII/landing_screen.dart';
+import 'package:GymApp/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'dart:math';
-
 
 //
 // class HomeNavigationDrawer extends StatelessWidget {
@@ -365,7 +363,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
               gradient: LinearGradient(
                 colors: [
                   Colors.blue[400],
-                  Colors.blue[800]
+                  Colors.blue[800],
                 ],
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter
@@ -384,7 +382,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
                       children: [
                         CircleAvatar (
                           radius: 50.0,
-                          backgroundImage: AssetImage('apple.png'),
+                          backgroundImage: AssetImage('assets/apple.png'),
                         ),
                         SizedBox(height: 10.0,),
                         Text('Newton',style: TextStyle(color: Colors.white,fontSize: 20.0),),
@@ -396,7 +394,9 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
                       child:ListView(
                           children:[
                             ListTile(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                              },
                               leading: Icon(FontAwesomeIcons.home,color: Colors.white,),
                               title: Text(
                                 'Home',
@@ -404,10 +404,12 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
                               ),
                             ),
                             ListTile(
-                              onTap: (){},
-                              leading: Icon(FontAwesomeIcons.home,color: Colors.white,),
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => BMICalculator()));
+                              },
+                              leading: Icon(FontAwesomeIcons.calculator,color: Colors.white,),
                               title: Text(
-                                'Home',
+                                'BMI SCREEN',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -415,7 +417,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
                               onTap: (){},
                               leading: Icon(FontAwesomeIcons.home,color: Colors.white,),
                               title: Text(
-                                'Home',
+                                'BMR CALCULATOR',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -423,7 +425,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
                               onTap: (){},
                               leading: Icon(FontAwesomeIcons.home,color: Colors.white,),
                               title: Text(
-                                'Home',
+                                'About Us',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -434,7 +436,6 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
               ),
             ),
           ),
-
           //Now lets Make our Main Screen \
           //We have to wrap our main screen in a tween animation builder
           //which will allow us to animate through it so go to home.dart

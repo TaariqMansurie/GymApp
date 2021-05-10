@@ -1,8 +1,10 @@
-import 'file:///C:/Users/taari/GymApp/lib/Screens/Diet/diet_plans.dart';
+
 import 'package:GymApp/Widgets/top_meals.dart';
 import 'package:GymApp/Widgets/top_product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'diet_plans.dart';
 
 class Diet extends StatefulWidget {
   @override
@@ -30,7 +32,7 @@ class _DietState extends State<Diet> {
                 ),),
                 buildTopProducts(),
                 buildTopMeals(),
-                Center(child: Image.asset('assets/images/meditation_bg.png')),
+                Center(child: Image.asset('assets/meditation_bg.png')),
                 // RaisedButton(
                 //   onPressed: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => DietPlans(),));},
                 //   child: Text(
@@ -93,20 +95,20 @@ class _DietState extends State<Diet> {
   Widget buildTopProductsList() {
     List topProductList = [
       TopProductTile(
-        assetPath: 'assets/images/apple.png',
+        assetPath: 'assets/apple.png',
         color: Color(0xffDFECF8),
         details: '\$50.00',
         title: 'Yearly Plan',
       ),
       TopProductTile(
         color: Color(0xffF4DEF8),
-        assetPath: 'assets/images/summer.png',
+        assetPath: 'assets/summer.png',
         title: 'Monthly Plan',
         details: '\$18.00',
       ),
       TopProductTile(
         color: Color(0xffFFF2C5),
-        assetPath: 'assets/images/vegetable.png',
+        assetPath: 'assets/vegetable.png',
         title: 'Quaterly Plan',
         details: '\$30.00',
       ),
@@ -169,20 +171,20 @@ class _DietState extends State<Diet> {
   Widget buildTopMealsList() {
     List topProductList = [
       TopMealTile(
-        assetPath: 'assets/images/kiwi.png',
+        assetPath: 'assets/vegetable.png',
         color: Color(0xffDFECF8),
         details: '\$12.99',
         title: 'Keto Meal',
       ),
       TopMealTile(
         color: Color(0xffF4DEF8),
-        assetPath: 'assets/images/summer.png',
+        assetPath: 'assets/summer.png',
         title: 'High Protein Meal',
         details: '\$12.99',
       ),
       TopMealTile(
         color: Color(0xffFFF2C5),
-        assetPath: 'assets/images/strawberry.png',
+        assetPath: 'assets/apple.png',
         title: 'Vegan Meal',
         details: '\$13.50',
       ),

@@ -1,5 +1,3 @@
-import 'file:///C:/Users/taari/GymApp/lib/Screens/Diet/diet.dart';
-
 import 'diet_item.dart';
 
 

@@ -6,6 +6,7 @@ import 'package:GymApp/Screens/Transformations/transformation1.dart';
 import 'package:GymApp/Screens/Transformations/transformation2.dart';
 import 'package:GymApp/Screens/Transformations/transformation3.dart';
 import 'package:GymApp/Screens/crossfit.dart';
+import 'package:GymApp/Screens/details_screen.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -113,7 +114,7 @@ class _HomeState extends State<Home> {
         ),
       ],
     ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+     // bottomNavigationBar: _buildBottomNavigationBar(),
       drawer: HiddenDrawer(),
       body: SingleChildScrollView(
         child: TweenAnimationBuilder(
@@ -135,7 +136,7 @@ class _HomeState extends State<Home> {
                     color: Color(0xFFF5CEB8),
                     image: DecorationImage(
                       alignment: Alignment.centerLeft,
-                      image: AssetImage("assets/images/undraw_pilates_gpdb.png"),
+                      image: AssetImage("assets/undraw_pilates_gpdb.png"),
                     ),
                   ),
                 ),
@@ -161,10 +162,10 @@ class _HomeState extends State<Home> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                   alignment: Alignment.centerLeft,
-                                  image : AssetImage("assets/images/undraw_pilates_gpdb.png")
+                                  image : AssetImage("assets/undraw_pilates_gpdb.png")
                                 )
                               ),
-                              child: SvgPicture.asset("assets/icons/menu.svg"),
+                              child: SvgPicture.asset("assets/menu.svg"),
                             ),
                           ),
                           Text(
@@ -227,7 +228,10 @@ class _HomeState extends State<Home> {
                                 // yoga ka card
                                 InkWell(
                                   onTap: () {
-                                    print('hua hua !!');
+                                    Navigator.push(
+                                        context, MaterialPageRoute(builder: (context) => DetailsScreen()
+                                    )
+                                    );
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -622,6 +626,13 @@ class _HomeState extends State<Home> {
                             }),
 
                           ),
+                          Text(
+                            "Articles  ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                .copyWith(fontWeight: FontWeight.w900),
+                          ),
                          //SizedBox(height: 15.0,),
                       // ListView(
                       //   scrollDirection: Axis.horizontal,
@@ -735,14 +746,14 @@ class _HomeState extends State<Home> {
       'Home',
       'Favorites',
       'Notifications',
-      'Profile'
+      'About Us'
     ];
 
     List<IconData> bottomNavigationBarIcons = [
       Icons.home,
       Icons.favorite_border,
       Icons.notifications_none,
-      Icons.person_outline
+      Icons.info_outline
     ];
 
     return Container(
@@ -759,6 +770,7 @@ class _HomeState extends State<Home> {
               flex: 2,
               child: GestureDetector(
                 onTap: () {
+
                   setState(() {
                     selectedOptionIndex = index;
                   });

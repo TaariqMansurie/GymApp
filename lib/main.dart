@@ -1,6 +1,4 @@
-import 'package:GymApp/Authentication/login.dart';
-import 'package:GymApp/Authentication/register.dart';
-import 'package:GymApp/Screens/home.dart';
+
 import 'package:GymApp/shared/users.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +35,7 @@ class _MyAppState extends State<MyApp> {
         ),
         seconds: 6,
         navigateAfterSeconds: AfterSplash(),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.deepPurple[200],
         loaderColor: Colors.white70,
       ),
     );
