@@ -1,4 +1,4 @@
-import 'package:GymApp/Screens/crossfit.dart';
+import 'package:GymApp/Screens/Trainings/crossfit.dart';
 import 'package:GymApp/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

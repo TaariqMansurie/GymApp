@@ -72,7 +72,7 @@ class _DietState extends State<Diet> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                _ExploreAllButton(
+                ExploreAllButton(
                   onTap: () {
                     Navigator.push(
                       context, MaterialPageRoute(builder : (context) => DietPlans()),
@@ -149,7 +149,7 @@ class _DietState extends State<Diet> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                _ExploreAllButton(
+                ExploreAllButton(
                   onTap: () {
                     Navigator.push(
                       context, MaterialPageRoute(builder : (context) => DietPlans()),
@@ -205,9 +205,9 @@ class _DietState extends State<Diet> {
     );
   }
 }
-class _ExploreAllButton extends StatelessWidget {
+class ExploreAllButton extends StatelessWidget {
   final Function onTap;
-  const _ExploreAllButton({
+  const ExploreAllButton({
     Key key,
     this.onTap,
   }) : super(key: key);

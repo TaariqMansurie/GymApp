@@ -7,6 +7,7 @@ import 'package:GymApp/shared/OrDivider.dart';
 import 'package:GymApp/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UserSignIn extends StatefulWidget {
   final Function toggleView;
@@ -204,24 +205,36 @@ Future <Userr> signInWithGoogle() async {
                   // ),
                 ),
                 SizedBox(height: 20.0),
-                TextFormField(
-                  controller: emailEditingController,
-                  decoration:
-                  textInputDecoration1.copyWith(hintText: 'Enter Email Id'),
-                  validator: (val) =>
-                  RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(val)
-                      ? null
-                      : "Please Enter Correct Email",
-                  // onChanged: (val) {
-                  //   setState(() => email =val);
-                  // },
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: new BorderRadius.circular(10.0),
+                  ),
+                  child: TextFormField(
+                    controller: emailEditingController,
+                    decoration:
+                    textInputDecoration1.copyWith(hintText: 'Enter Email Id',icon: Icon(Icons.person),focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red[900]),
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),),
+                    validator: (val) =>
+                    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(val)
+                        ? null
+                        : "Please Enter Correct Email",
+                    // onChanged: (val) {
+                    //   setState(() => email =val);
+                    // },
+                  ),
                 ),
                 SizedBox(height: 20.0),
                 TextFormField(
                   controller: passwordEditingController,
                   decoration:
-                  textInputDecoration1.copyWith(hintText: 'Enter Password'),
+                  textInputDecoration1.copyWith(hintText: 'Enter Password',icon: FaIcon(FontAwesomeIcons.key,size: 20,),focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red[900]),
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),),
                   validator: (val) =>
                   val.length < 6 ? 'Enter a correct Password' : null,
                   obscureText: true,

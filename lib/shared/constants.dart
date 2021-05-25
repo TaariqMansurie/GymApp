@@ -1,5 +1,94 @@
 import 'package:flutter/material.dart';
 
+// const draweColor = Container(decoration: BoxDecoration(
+//               gradient: LinearGradient(
+//                 colors: [
+//                   Colors.blue[400],
+//                   Colors.blue[800],
+//                 ],
+//                 begin: Alignment.bottomCenter,
+//                 end: Alignment.topCenter
+//               )
+//             ),),
+
+
+//BMR
+
+
+const Color kAppBarColor = Color(0xFF792CEF);
+//const Color kAppBarColor = Color(Colors.deepPurple[800])
+
+const kActiveCardColor = Color(0xFFDCC4F6);
+const kInactiveCardColor = Color(0xF8ADA7AD);
+const kBottomButtonColor = Color(0xFF792CEF);
+const kBottomReturnButtonColor = Color(0xFFFF2F97);
+
+const kNumberStyle = TextStyle(
+  color: Colors.blueGrey,
+  fontWeight: FontWeight.w900,
+  fontSize: 50.0,
+  fontFamily: "Jaapokki",
+);
+
+const kLabelTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Color(0xFF100101),
+  fontFamily: "Jaapokki",
+);
+// My BMI score is 25.4. I have overweight. I want eat 2254 kcal daily.
+const kResultsTitleTextStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 28.0,
+    fontFamily: "Jaapokki");
+
+const kResultsTextStyle = TextStyle(
+  fontFamily: "Jaapokki",
+  fontWeight: FontWeight.bold,
+  fontSize: 12.0,
+  color: Color(0xFF48C67D),
+);
+
+const kBodyTextStyle = TextStyle(
+  color: Color(0xFF591CAE),
+  fontWeight: FontWeight.w400,
+  fontSize: 15.0,
+  fontFamily: "Jaapokki",
+);
+
+const kInfoTextStyle = TextStyle(
+  color: Color(0xFF591CAE),
+  fontWeight: FontWeight.bold,
+  fontSize: 30.0,
+  fontFamily: "Jaapokki",
+);
+
+const kBMITextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 80.0,
+  color: Color(0xFF417DE0),
+  fontFamily: "Jaapokki",
+);
+
+const kBMRWarning = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.grey,
+);
+
+const kBMRTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 28.0,
+  color: Colors.black,
+  fontFamily: "Jaapokki",
+);
+
+const kKcalTextStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 15.0,
+  color: Colors.black,
+  fontFamily: "Jaapokki",
+);
 const textInputDecoration1 = InputDecoration(
   hintText : 'Enter Email Id',
   fillColor: Colors.white,

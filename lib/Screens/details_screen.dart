@@ -95,6 +95,7 @@ class DetailsScreen extends StatelessWidget {
                           .title
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
+
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 20),
                       padding: EdgeInsets.all(10),
@@ -136,7 +137,9 @@ class DetailsScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                    )
+                    ),
+
+                    Center(child: Image.asset('assets/meditation_bg.png')),
                   ],
                 ),
               ),

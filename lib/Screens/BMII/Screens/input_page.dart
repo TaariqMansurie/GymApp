@@ -38,15 +38,15 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
-        automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_rounded),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-          },
-          color: Colors.white,
-          tooltip: 'Back',
-        ),
+        automaticallyImplyLeading: false,
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back_rounded),
+        //   onPressed: () {
+        //     Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+        //   },
+        //   color: Colors.white,
+        //   tooltip: 'Back',
+        // ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

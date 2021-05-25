@@ -2,10 +2,11 @@ import 'dart:math';
 
 
 import 'package:GymApp/Drawers/homeNavigationDrawer.dart';
+import 'package:GymApp/Screens/Trainings/list_of_trainings.dart';
 import 'package:GymApp/Screens/Transformations/transformation1.dart';
 import 'package:GymApp/Screens/Transformations/transformation2.dart';
 import 'package:GymApp/Screens/Transformations/transformation3.dart';
-import 'package:GymApp/Screens/crossfit.dart';
+import 'package:GymApp/Screens/Trainings/crossfit.dart';
 import 'package:GymApp/Screens/details_screen.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -64,57 +65,66 @@ class _HomeState extends State<Home> {
           tooltip: 'Menu',
       ),
       ),
-      floatingActionButton: SpeedDial(
-        animatedIcon: AnimatedIcons.add_event,
-        overlayColor: Colors.black,
-        backgroundColor: Colors.deepPurple[500],
-        animatedIconTheme: IconThemeData.fallback(),
-        shape: CircleBorder(),
-        children: [
-          SpeedDialChild(
-          child: Icon(Icons.image),
-          backgroundColor: Colors.blue,
-          label: 'Add Images',
-          onTap: () {
-            // showModalBottomSheet(
-            //   context: context,
-            //   builder: ((builder) => bottomSheet2(uid)),
-            // );
-          },
-        ),
-          SpeedDialChild(
-          child: Icon(Icons.videocam),
-          backgroundColor: Colors.blue,
-          label: 'Add Videos',
-          onTap: () {
-            // showModalBottomSheet(
-            //   context: context,
-            //   builder: ((builder) => bottomSheet3(uid)),
-            // );
-          },
-        ),
-          SpeedDialChild(
-          child: Icon(Icons.picture_as_pdf),
-          backgroundColor: Colors.blue,
-          label: 'Add Pdf files',
-          onTap: () {
-            // Navigator.push(
-            //     context, MaterialPageRoute(builder: (context) => UploadingPdf()));
-          },
-        ),
-          SpeedDialChild(
-          child: Icon(Icons.event_note),
-          backgroundColor: Colors.blue,
-          label: 'Add Notes',
-          onTap: () {
-          //   Navigator.push(
-          //       context, MaterialPageRoute(builder: (context) => Notes()));
-          //
-           },
-        ),
-      ],
+    floatingActionButton: FloatingActionButton(
+      tooltip: 'Chat With Us, So that we can assist you. ',
+      backgroundColor: Colors.deepPurple[800],
+      elevation: 10.0,
+      onPressed: (){},
+      child: const Icon(FontAwesomeIcons.rocketchat),
     ),
+
+    //   floatingActionButton: SpeedDial(
+    //     animatedIcon: AnimatedIcons.add_event,
+    //     overlayColor: Colors.black,
+    //     backgroundColor: Colors.deepPurple[500],
+    //     animatedIconTheme: IconThemeData.fallback(),
+    //     shape: CircleBorder(),
+    //     children: [
+    //       SpeedDialChild(
+    //       child: Icon(Icons.image),
+    //       backgroundColor: Colors.blue,
+    //       label: 'Add Images',
+    //       onTap: () {
+    //         // showModalBottomSheet(
+    //         //   context: context,
+    //         //   builder: ((builder) => bottomSheet2(uid)),
+    //         // );
+    //       },
+    //     ),
+    //       SpeedDialChild(
+    //       child: Icon(Icons.videocam),
+    //       backgroundColor: Colors.blue,
+    //       label: 'Add Videos',
+    //       onTap: () {
+    //         // showModalBottomSheet(
+    //         //   context: context,
+    //         //   builder: ((builder) => bottomSheet3(uid)),
+    //         // );
+    //       },
+    //     ),
+    //       SpeedDialChild(
+    //       child: Icon(Icons.picture_as_pdf),
+    //       backgroundColor: Colors.blue,
+    //       label: 'Add Pdf files',
+    //       onTap: () {
+    //         // Navigator.push(
+    //         //     context, MaterialPageRoute(builder: (context) => UploadingPdf()));
+    //       },
+    //     ),
+    //       SpeedDialChild(
+    //       child: Icon(Icons.event_note),
+    //       backgroundColor: Colors.blue,
+    //       label: 'Add Notes',
+    //       onTap: () {
+    //       //   Navigator.push(
+    //       //       context, MaterialPageRoute(builder: (context) => Notes()));
+    //       //
+    //        },
+    //     ),
+    //   ],
+    // ),
      // bottomNavigationBar: _buildBottomNavigationBar(),
+
       drawer: HiddenDrawer(),
       body: SingleChildScrollView(
         child: TweenAnimationBuilder(
@@ -168,12 +178,27 @@ class _HomeState extends State<Home> {
                               child: SvgPicture.asset("assets/menu.svg"),
                             ),
                           ),
-                          Text(
-                            "Welcome aboard ! ",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5
-                                .copyWith(fontWeight: FontWeight.w900),textAlign: TextAlign.start,
+                          Row(
+                            children:<Widget> [
+                              Text(
+                              "Welcome aboard ! ",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  .copyWith(fontWeight: FontWeight.w900),textAlign: TextAlign.start,
+                            ),
+
+                            SizedBox(width: 60.0,),
+
+                            ExploreAllButton2(
+                               onTap: () {
+                                 Navigator.push(
+                                   context, MaterialPageRoute(
+                                     builder: (context) => Trainings()),
+                                 );
+                               },
+                            ),
+                           ],
                           ),
                           SizedBox(height: 10.0 ,),
 
@@ -375,6 +400,7 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                           ),
+
                           // Expanded(
                           //   child: GridView.count(
                           //     crossAxisCount: 2,
@@ -562,17 +588,18 @@ class _HomeState extends State<Home> {
                           // ],
                           //   ),
                           // ),
+
                           SizedBox(height: 15.0,),
 
                           Text(
-                            "Life Changing Transformations  ",
+                            "Life Changing Transformations : ",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5
                                 .copyWith(fontWeight: FontWeight.w900),
                           ),
 
-                          SizedBox(height:10.0,),
+                          SizedBox(height:20.0,),
 
                           CarouselSlider(
                             options: CarouselOptions(
@@ -610,6 +637,7 @@ class _HomeState extends State<Home> {
                               );
                             }).toList(),
                           ),
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: map<Widget>(transformationList, (index, url) {
@@ -626,13 +654,17 @@ class _HomeState extends State<Home> {
                             }),
 
                           ),
-                          Text(
-                            "Articles  ",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5
-                                .copyWith(fontWeight: FontWeight.w900),
-                          ),
+
+                          Center(child: Image.asset('assets/meditation_bg.png')),
+
+                          // Text(
+                          //   "Articles  ",
+                          //   style: Theme.of(context)
+                          //       .textTheme
+                          //       .headline5
+                          //       .copyWith(fontWeight: FontWeight.w900),
+                          // ),
+
                          //SizedBox(height: 15.0,),
                       // ListView(
                       //   scrollDirection: Axis.horizontal,
@@ -819,6 +851,39 @@ class _HomeState extends State<Home> {
             ),
           );
         }),
+      ),
+    );
+  }
+}
+
+class ExploreAllButton2 extends StatelessWidget {
+  final Function onTap;
+  const ExploreAllButton2({
+    Key key,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: this.onTap,
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10)),
+        ),
+        child: Text(
+          'Explore All',
+          style: GoogleFonts.varelaRound(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[700]),
+        ),
       ),
     );
   }

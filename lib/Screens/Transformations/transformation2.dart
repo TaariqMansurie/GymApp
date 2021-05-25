@@ -21,11 +21,11 @@ class SuperTransformation2 extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              title: Text('Super Transformation 1'),
+              title: Text('Super Transformation 2'),
               backgroundColor: Colors.deepPurple[400],
               expandedHeight: 350.0,
               flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset('apple.png'),
+                background: Image.asset('assets/apple.png'),
               ),
             ),
             SliverFixedExtentList(
