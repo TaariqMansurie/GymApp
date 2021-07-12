@@ -29,14 +29,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: new SplashScreen(
-        title: Text('This is Fit Mumbai',
-        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,color: Colors.white),
+      home: Center(
+        child: new SplashScreen(
+          //title: Text('This is Fit Mumbai',
+          //style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0,color: Colors.white),
+         // ),
+          seconds: 6,
+          image: Image.asset('assets/splashScreen.png'),photoSize: 150.0 ,
+          navigateAfterSeconds: AfterSplash(),
+          backgroundColor: Colors.black,
+          loaderColor: Colors.white70,
         ),
-        seconds: 6,
-        navigateAfterSeconds: AfterSplash(),
-        backgroundColor: Colors.deepPurple[200],
-        loaderColor: Colors.white70,
       ),
     );
   }

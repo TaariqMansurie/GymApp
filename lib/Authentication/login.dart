@@ -2,6 +2,7 @@ import 'package:GymApp/Authentication/register.dart';
 import 'package:GymApp/Screens/userhome.dart';
 import 'package:GymApp/Services/auth.dart';
 import 'package:GymApp/Services/database.dart';
+import 'package:GymApp/Widgets/custom_password_field.dart';
 import 'package:GymApp/helper/helper_functions.dart';
 import 'package:GymApp/shared/OrDivider.dart';
 import 'package:GymApp/shared/constants.dart';
@@ -27,7 +28,6 @@ class _UserSignInState extends State<UserSignIn> {
   final _formKey = GlobalKey<FormState>();
   //udemy2
   //final GoogleSignIn googleSignIn = new GoogleSignIn();
-
 
   bool isLoading = false;
 
@@ -60,9 +60,9 @@ class _UserSignInState extends State<UserSignIn> {
               userInfoSnapshot.documents[0].data["userName"]);
           HelperFunctions.saveUserEmailSharedPreference(
               userInfoSnapshot.documents[0].data["userEmail"]);
-
-          Navigator.pop(context);
-          Navigator.pop(context);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserHome()));
+          // Navigator.pop(context);
+          // Navigator.pop(context);
         } else {
           setState(() {
             isLoading = false;
@@ -73,101 +73,6 @@ class _UserSignInState extends State<UserSignIn> {
     }
   }
 
-  //sign in with google
-
-  // signInWithGoogle() async {
-  //   final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-  //   final GoogleSignIn googleSignIn = new GoogleSignIn();
-  //   final GoogleSignInAuthentication googleAuth =
-  //       await googleUser.authentication;
-
-  //   final AuthCredential credential = GoogleAuthProvider.getCredential(
-  //       idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
-
-  //   final FirebaseUser user = (await FirebaseAuth.instance.signInWithCredential(credential)).user ;
-  // }
-
-// ek aur method google sign in ki
-
-
-
-
-  // Future<FirebaseUser> signInWithGoogle() async {
-  //   // Trigger the authentication flow
-  //   final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
-  //
-  //   // Obtain the auth details from the request
-  //   final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-  //
-  //   // Create a new credential
-  //   final AuthCredential credential = GoogleAuthProvider.getCredential(
-  //     accessToken: googleAuth.accessToken,
-  //     idToken: googleAuth.idToken,
-  //   );
-  //
-  //   // Once signed in, return the UserCredential
-  //   return ((await FirebaseAuth.instance.signInWithCredential(credential)).user);
-  //
-  // }
-
-/*
-Future <Userr> signInWithGoogle() async {
-    GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
-
-  if (googleSignInAccount != null) {
-    GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
-
-    AuthCredential credential = GoogleAuthProvider.getCredential(
-        idToken: googleSignInAuthentication.idToken,
-        accessToken: googleSignInAuthentication.accessToken);
-
-    AuthResult result = await FirebaseAuth.instance.signInWithCredential(credential);
-
-    FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    print(user.uid);
-
-   // return Future.value(true);
-  }
-
-}
-*/
-
-
-  //yash ki method
-
-  // Future<Userr> signInWithhGoogle() async {
-  //   try {
-  //     final googleuser = await _googleSignIn.signIn();
-  //     final GoogleSignInAuthentication googleSignInAuthentication =
-  //     await googleuser.authentication;
-  //     final AuthCredential credentials = GoogleAuthProvider.getCredential(
-  //         idToken: googleSignInAuthentication.idToken,
-  //         accessToken: googleSignInAuthentication.accessToken);
-  //     final AuthResult authResult =
-  //      await FirebaseAuth.instance.signInWithCredential(credentials);
-  //     final FirebaseUser user = authResult.user;
-  //     print(user.displayName);
-  //    await Firestore.instance.collection(user);
-
-  //     return _userfromfirebase(user);
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
-
-  //udemy 2
-  // Future <FirebaseUser> gSignIn() async {
-  //   GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-  //   GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-
-  //   FirebaseUser user = await _auth.signInWithGoogle(
-  //     idToken:googleSignInAuthentication.idToken,
-  //     accessToken: googleSignInAuthentication.accessToken
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -175,7 +80,7 @@ Future <Userr> signInWithGoogle() async {
       appBar: AppBar(
         backgroundColor: Colors.deepPurple[500],
         elevation: 0.0,
-        title: Text('Sign in to Fit Mumbai'),
+        title: Text('Sign in to Fitnezz Den'),
         /* actions: <Widget>[
           FlatButton.icon(
             icon : Icon(Icons.person),
@@ -207,15 +112,15 @@ Future <Userr> signInWithGoogle() async {
                 SizedBox(height: 20.0),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey,
+                    color: Colors.deepPurple[100],
                     borderRadius: new BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     controller: emailEditingController,
                     decoration:
-                    textInputDecoration1.copyWith(hintText: 'Enter Email Id',icon: Icon(Icons.person),focusedBorder: OutlineInputBorder(
+                    textInputDecoration1.copyWith(hintText: 'Enter Email Id',/*icon: Icon(Icons.person)*/focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red[900]),
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(15.0),gapPadding: 50.0
                     ),),
                     validator: (val) =>
                     RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -228,19 +133,30 @@ Future <Userr> signInWithGoogle() async {
                   ),
                 ),
                 SizedBox(height: 20.0),
-                TextFormField(
-                  controller: passwordEditingController,
-                  decoration:
-                  textInputDecoration1.copyWith(hintText: 'Enter Password',icon: FaIcon(FontAwesomeIcons.key,size: 20,),focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red[900]),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),),
-                  validator: (val) =>
-                  val.length < 6 ? 'Enter a correct Password' : null,
-                  obscureText: true,
-                  // onChanged: (val) {
-                  //   setState(() => password =val);
-                  // },
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple[100],
+                    borderRadius: new BorderRadius.circular(10.0),
+                  ),
+                  height: 55,
+                  // child: TextFormField(
+                  //   controller: passwordEditingController,
+                  //   decoration:
+                  //   textInputDecoration1.copyWith(hintText: 'Enter Password',icon: FaIcon(FontAwesomeIcons.key,size: 20,),focusedBorder: OutlineInputBorder(
+                  //     borderSide: BorderSide(color: Colors.red[900]),
+                  //     borderRadius: BorderRadius.circular(15.0),gapPadding: 50.0
+                  //   ),),
+                  //   validator: (val) =>
+                  //   val.length < 6 ? 'Enter a correct Password' : null,
+                  //   obscureText: true,
+                  //   // onChanged: (val) {
+                  //   //   setState(() => password =val);
+                  //   // },
+                  // ),
+                  child: PasswordInputField(
+                    icon: FontAwesomeIcons.key,
+                    controller: passwordEditingController,
+                  ),
                 ),
                 SizedBox(
                   height: 16,

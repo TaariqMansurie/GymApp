@@ -290,7 +290,6 @@ import 'package:GymApp/Screens/BMR/screens/main_page.dart';
 import 'package:GymApp/about_us.dart';
 import 'package:GymApp/Screens/BMII/landing_screen.dart';
 import 'package:GymApp/Screens/home.dart';
-import 'package:GymApp/Screens/userhome.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -298,11 +297,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HiddenDrawer extends StatelessWidget{
 
-  final Function onTap ;
-
-  HiddenDrawer({
-    this.onTap
-  });
+  // final Function onTap ;
+  //
+  // HiddenDrawer({
+  //   this.onTap
+  // });
 
   @override
   Widget build(BuildContext context) {
@@ -310,7 +309,7 @@ class HiddenDrawer extends StatelessWidget{
       width: MediaQuery.of(context).size.width*0.8,
       child: Theme(
       data: Theme.of(context).copyWith(
-      canvasColor: Colors.deepPurple[100],), //This will change the drawer background to blue.
+      canvasColor: Colors.deepPurple[100],), //This will change the drawer background to purple.
       //other styles
         child: Drawer(
           child : Column (
@@ -376,14 +375,14 @@ class HiddenDrawer extends StatelessWidget{
                 title: Text(
                   'Home',
                   style: TextStyle(color: Colors.black),
-                ),tileColor: Colors.deepPurple[100],
+                ),hoverColor: Colors.deepPurple[100],
               ),
               ListTile(
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => BMICalculator()));
                 },
-                hoverColor: Colors.pink,selectedTileColor: Colors.pink,
+                hoverColor: Colors.pink,
                 leading: Icon(
                   FontAwesomeIcons.calculator,
                   color: Colors.black,
@@ -465,7 +464,7 @@ class HiddenDrawer extends StatelessWidget{
                       MaterialPageRoute(builder: (context) => Register()));
                 },
                 leading: Icon(
-                  Icons.person_add_alt_1_outlined,size: 30.0,
+                  Icons.person_add,size: 30.0,
                   color: Colors.black,
                 ),
                 title: Text(

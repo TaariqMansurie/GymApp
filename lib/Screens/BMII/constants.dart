@@ -10,8 +10,18 @@ const kLabelTextStyle = TextStyle(
   color: Color(0xFF8D8E98),
 );
 
+const kGenderTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Colors.black,
+);
+
 const kNumberTextStyle = TextStyle(
   fontSize: 50.0,
+  fontWeight: FontWeight.w900,
+);
+
+const NumberTextStyle = TextStyle(
+  fontSize: 40.0,
   fontWeight: FontWeight.w900,
 );
 

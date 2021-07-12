@@ -52,4 +52,10 @@ class DatabaseMethods{
     // .updateData();
   }
 
+  Future<void> addTrainerInfo (name, uid) async {
+    Firestore.instance.collection("users").document(uid).updateData({
+      "Trainer\'s Info": FieldValue.arrayUnion([name])
+    });
+  }
+
 }

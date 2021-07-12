@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // const draweColor = Container(decoration: BoxDecoration(
@@ -19,14 +20,14 @@ const Color kAppBarColor = Color(0xFF792CEF);
 //const Color kAppBarColor = Color(Colors.deepPurple[800])
 
 const kActiveCardColor = Color(0xFFDCC4F6);
-const kInactiveCardColor = Color(0xF8ADA7AD);
+const kInactiveCardColor = Color(0xFF792CEF);
 const kBottomButtonColor = Color(0xFF792CEF);
 const kBottomReturnButtonColor = Color(0xFFFF2F97);
 
 const kNumberStyle = TextStyle(
   color: Colors.blueGrey,
   fontWeight: FontWeight.w900,
-  fontSize: 50.0,
+  fontSize: 45.0,
   fontFamily: "Jaapokki",
 );
 
@@ -89,22 +90,47 @@ const kKcalTextStyle = TextStyle(
   color: Colors.black,
   fontFamily: "Jaapokki",
 );
-const textInputDecoration1 = InputDecoration(
+var textInputDecoration1 = InputDecoration(
+  // enabledBorder: OutlineInputBorder(
+  //     borderSide: BorderSide(
+  //       color: Colors.red[900],
+  //       width: 1.0,
+  //     ),
+  //     borderRadius: BorderRadius.circular(15.0),gapPadding: 50.0
+  // ),
+  // focusedBorder: OutlineInputBorder(
+  //   borderSide: BorderSide(
+  //     color: Color(0xffff5a5f),
+  //     width: 2.0,
+  //   ),
+  //   borderRadius: BorderRadius.circular(15.0),
+  // ),
+  // contentPadding: EdgeInsets.symmetric(
+  //   vertical: 15.0,
+  //   horizontal: 20,
+  // ),
+  // fillColor: Colors.white,
+  // filled: true,
   hintText : 'Enter Email Id',
   fillColor: Colors.white,
   filled: true ,
   enabledBorder : OutlineInputBorder(
       borderSide : BorderSide(
-          color: Colors.white,
-          width : 2.0
+          color: Colors.red[900],
+          width : 1.0
       )
   ),
   focusedBorder : OutlineInputBorder(
       borderSide : BorderSide(
-          color: Colors.pink,
+          color: Color(0xffff5a5f),
           width : 2.0
-      )
+      ),
+    borderRadius: BorderRadius.circular(15.0),gapPadding: 50.0
   ),
+  contentPadding: EdgeInsets.symmetric(
+    vertical: 15.0,
+    horizontal: 20
+  )
 );
 const textInputDecoration2 = InputDecoration(
   labelStyle: TextStyle(color: Colors.white),

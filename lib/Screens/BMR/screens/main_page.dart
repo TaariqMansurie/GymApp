@@ -14,7 +14,7 @@ enum GenderType {
   female,
 }
 
-class BmrHome extends StatefulWidget {
+class   BmrHome extends StatefulWidget {
   @override
   _BmrHomeState createState() => _BmrHomeState();
 }
@@ -93,7 +93,7 @@ class _BmrHomeState extends State<BmrHome> {
                                 width: 8.0,
                               ),
                               RoundedIconButton(
-                                  color: Colors.deepPurple[800],
+                                  color: Colors.deepPurple[600],
                                   icon: FontAwesomeIcons.plus,
                                   action: () {
                                     setState(() {
@@ -144,7 +144,7 @@ class _BmrHomeState extends State<BmrHome> {
                                 width: 8.0,
                               ),
                               RoundedIconButton(
-                                  color: Colors.deepPurple[800],
+                                  color: Colors.deepPurple[600],
                                   icon: FontAwesomeIcons.plus,
                                   action: () {
                                     setState(() {
@@ -194,7 +194,7 @@ class _BmrHomeState extends State<BmrHome> {
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
                       activeTrackColor: Colors.deepPurple[400],
-                      thumbColor: Colors.deepPurple[800],
+                      thumbColor: Colors.deepPurple[600],
                       overlayColor: Color(0x2900D1FF),
                       thumbShape:
                           RoundSliderThumbShape(enabledThumbRadius: 15.0),
@@ -228,7 +228,7 @@ class _BmrHomeState extends State<BmrHome> {
                         : kInactiveCardColor,
                     childContainer: GenderIconContent(
                       color: Color(0xFF18C0F4),
-                      sex: FontAwesomeIcons.mars,
+                      sex: FontAwesomeIcons.male,
                       label: 'MALE',
                     ),
                     gesture: () {
@@ -245,7 +245,7 @@ class _BmrHomeState extends State<BmrHome> {
                         : kInactiveCardColor,
                     childContainer: GenderIconContent(
                       color: Color(0xFFF1008F),
-                      sex: FontAwesomeIcons.venus,
+                      sex: FontAwesomeIcons.female,
                       label: 'FEMALE',
                     ),
                     gesture: () {

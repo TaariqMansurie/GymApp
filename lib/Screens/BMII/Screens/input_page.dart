@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../Components/sameHeightScreen.dart';
@@ -38,15 +39,7 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
-        automaticallyImplyLeading: false,
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back_rounded),
-        //   onPressed: () {
-        //     Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-        //   },
-        //   color: Colors.white,
-        //   tooltip: 'Back',
-        // ),
+        automaticallyImplyLeading: true,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -105,7 +98,7 @@ class _InputPageState extends State<InputPage> {
                     children: <Widget>[
                       Text(
                         height.toString(),
-                        style: kNumberTextStyle,
+                        style: NumberTextStyle,
                       ),
                       Text(
                         'cm',
@@ -154,7 +147,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           weight.toString(),
-                          style: kNumberTextStyle,
+                          style: NumberTextStyle,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -195,7 +188,7 @@ class _InputPageState extends State<InputPage> {
                         ),
                         Text(
                           age.toString(),
-                          style: kNumberTextStyle,
+                          style: NumberTextStyle,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -232,23 +225,30 @@ class _InputPageState extends State<InputPage> {
          // TransitionDot(animation: _submitAnimationController),
 
         //  _buildBottom(context),
-          BottomButton(
-            buttonTitle: 'CALCULATE',
-            onTap: () {
-              CalculatorBrain calc =
-              CalculatorBrain(height: height, weight: weight);
+          Padding(
+            padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+            child: RaisedButton(
+              elevation: 5,
+              color: Color(0xFFEB1555),
+              hoverColor: Color(0x29EB1555),
+              hoverElevation: 5,
+              child: Text('CALCULATE'),
+              onPressed: () {
+                CalculatorBrain calc =
+                CalculatorBrain(height: height, weight: weight);
 
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ResultsPage(
-                    bmiResult: calc.calculateBMI(),
-                    resultText: calc.getResult(),
-                    interpretation: calc.getInterpretation(),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsPage(
+                      bmiResult: calc.calculateBMI(),
+                      resultText: calc.getResult(),
+                      interpretation: calc.getInterpretation(),
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ],
       ),

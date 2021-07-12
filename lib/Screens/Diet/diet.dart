@@ -44,7 +44,6 @@ class _DietState extends State<Diet> {
                 //     ),
                 //   ),
                 // ),
-
               ],
             )
         ),
