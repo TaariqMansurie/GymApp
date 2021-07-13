@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:GymApp/shared/users.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,14 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'Screens/Diet/diet.dart';
 import 'Screens/Trainings/crossfit.dart';
 import 'Screens/Trainings/list_of_trainings.dart';
-import 'Screens/Transformations/transformation1.dart';
-import 'Screens/Transformations/transformation2.dart';
-import 'Screens/Transformations/transformation3.dart';
-import 'Screens/Transformations/transformation4.dart';
 import 'Screens/details_screen.dart';
 
 class Home2 extends StatefulWidget {
@@ -42,8 +40,10 @@ class _Home2State extends State<Home2> {
     return result;
   }
   double value = 0;
+
   @override
   Widget build(BuildContext context) {
+    String uid = Provider.of<User>(context).uid;
     var size = MediaQuery.of(context)
         .size;
     return Scaffold(
@@ -61,17 +61,7 @@ class _Home2State extends State<Home2> {
         ),
       ),
       body: SingleChildScrollView(
-        child: TweenAnimationBuilder(
-          tween: Tween<double>(begin: 0, end: value),
-          duration: Duration(milliseconds: 500),
-          builder: (_, double val,__) {
-            return (Transform(
-              transform :Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..setEntry(0, 3, 200 * val) //this line will allow us to translate the screen
-                ..rotateY((pi/6) * val),
-
-              child: Stack(
+        child:  Stack(
                 children: <Widget>[
                   Container(
                     // Here the height of the container is 45% of our total height
@@ -88,7 +78,6 @@ class _Home2State extends State<Home2> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       //child: SingleChildScrollView(
-
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -683,10 +672,6 @@ class _Home2State extends State<Home2> {
                 ],
               ),
             ));
-          },
-        ),
-      ),
-    );
   }
 }
 

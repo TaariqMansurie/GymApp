@@ -1,6 +1,10 @@
+import 'package:GymApp/Model/gender.dart';
+import 'package:GymApp/Screens/Trainers/trainersForm2.dart';
+import 'package:GymApp/Screens/Trainers/trainersForm3.dart';
 import 'package:GymApp/Services/database.dart';
 import 'package:GymApp/Widgets/customInput.dart';
 import 'package:GymApp/shared/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -317,6 +321,24 @@ class _TrainerFormState extends State<TrainerForm> {
   @override
   Widget build(BuildContext context) {
     var uid = Provider.of<User>(context).uid;
+    var uidd = Provider.of<User>(context).uidd;
+
+    CollectionReference ref = Firestore.instance
+        .collection('users')
+        .document(uid)
+        .collection('maleTrainers');
+
+    DocumentReference documentReference = Firestore.instance
+        .collection('users')
+        .document(uid)
+        .collection('maleTrainers')
+        .document(uidd);
+
+    CollectionReference reff = Firestore.instance
+        .collection('users')
+        .document(uid)
+        .collection('femaleTrainers');
+    
     var credentials = Provider.of<User>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
@@ -693,35 +715,118 @@ class _TrainerFormState extends State<TrainerForm> {
                                     certificateSelectedYear,
                                 'Achievements' : achievements.text.toString(),
                               };
-                              db.addTrainerInfo({
-                                'First Name': firstName.text.toString(),
-                                'Last Name': lastName.text.toString(),
-                                'Address': address.text.toString(),
-                                'Gender': selectedGender.toString(),
-                                'DOB': selectedDate +
-                                    ' ' +
-                                    selectedMonth +
-                                    ' ' +
-                                    selectedYear,
-                                'LinkedIn Profile':linkedin.text.toString(),
-                                'Certifications': certifications.text.toString(),
-                                'Date of Certifications' : certificateSelectedDate +
-                                    ' ' +
-                                    certificateSelectedMonth +
-                                    ' ' +
-                                    certificateSelectedYear,
-                                'Achievements' : achievements.text.toString(),
-                              }, uid);
+                              // if(selectedGender != 'Female') {
+                              //   // db.addTrainerMaleInfo({
+                              //   //   'First Name': firstName.text.toString(),
+                              //   //   'Last Name': lastName.text.toString(),
+                              //   //   'Address': address.text.toString(),
+                              //   //   'Gender': selectedGender.toString(),
+                              //   //   'DOB': selectedDate +
+                              //   //       ' ' +
+                              //   //       selectedMonth +
+                              //   //       ' ' +
+                              //   //       selectedYear,
+                              //   //   'LinkedIn Profile':linkedin.text.toString(),
+                              //   //   'Certifications': certifications.text.toString(),
+                              //   //   'Date of Certifications' : certificateSelectedDate +
+                              //   //       ' ' +
+                              //   //       certificateSelectedMonth +
+                              //   //       ' ' +
+                              //   //       certificateSelectedYear,
+                              //   //   'Achievements' : achievements.text.toString(),
+                              //   // }, uid,uidd);}
+                              //   ref.add({
+                              //     'First Name': firstName.text.toString(),
+                              //       'Last Name': lastName.text.toString(),
+                              //       'Address': address.text.toString(),
+                              //       'Gender': selectedGender.toString(),
+                              //       'DOB': selectedDate +
+                              //           ' ' +
+                              //           selectedMonth +
+                              //           ' ' +
+                              //           selectedYear,
+                              //       'LinkedIn Profile':linkedin.text.toString(),
+                              //       'Certifications': certifications.text.toString(),
+                              //       'Date of Certifications' : certificateSelectedDate +
+                              //           ' ' +
+                              //           certificateSelectedMonth +
+                              //           ' ' +
+                              //           certificateSelectedYear,
+                              //       'Achievements' : achievements.text.toString(),
+                              //   }).whenComplete(() => print('Hogaya male'));
+                              // }
+                              // else {
+                              //   // db.addTrainerFemaleInfo({
+                              //   //   'First Name': firstName.text.toString(),
+                              //   //   'Last Name': lastName.text.toString(),
+                              //   //   'Address': address.text.toString(),
+                              //   //   'Gender': selectedGender.toString(),
+                              //   //   'DOB': selectedDate +
+                              //   //       ' ' +
+                              //   //       selectedMonth +
+                              //   //       ' ' +
+                              //   //       selectedYear,
+                              //   //   'LinkedIn Profile':linkedin.text.toString(),
+                              //   //   'Certifications': certifications.text.toString(),
+                              //   //   'Date of Certifications' : certificateSelectedDate +
+                              //   //       ' ' +
+                              //   //       certificateSelectedMonth +
+                              //   //       ' ' +
+                              //   //       certificateSelectedYear,
+                              //   //   'Achievements' : achievements.text.toString(),
+                              //   // }, uid,uidd);
+                              //   reff.add({
+                              //     'First Name': firstName.text.toString(),
+                              //     'Last Name': lastName.text.toString(),
+                              //     'Address': address.text.toString(),
+                              //     'Gender': selectedGender.toString(),
+                              //     'DOB': selectedDate +
+                              //         ' ' +
+                              //         selectedMonth +
+                              //         ' ' +
+                              //         selectedYear,
+                              //     'LinkedIn Profile':linkedin.text.toString(),
+                              //     'Certifications': certifications.text.toString(),
+                              //     'Date of Certifications' : certificateSelectedDate +
+                              //         ' ' +
+                              //         certificateSelectedMonth +
+                              //         ' ' +
+                              //         certificateSelectedYear,
+                              //     'Achievements' : achievements.text.toString(),
+                              //   }).whenComplete(() => print('Hogaya Female'));
+                              // }
                               print(firstName);
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    print(certificateSelectedYear);
-                                    return AfterTrainerFormSubmission(
-                                      //personalDetailsMap: personalDetail,
-                                    );
-                                  }));
+                              if(selectedGender != 'Female'){
+                                Navigator.push((context),
+                                    MaterialPageRoute(builder: (context){
+                                      return TrainersForm2(
+                                        firstName,lastName,address,selectedGender,
+                                        selectedDate,selectedMonth,selectedYear,
+                                        linkedin,certifications,certificateSelectedDate,
+                                        certificateSelectedMonth,certificateSelectedYear,
+                                        achievements
+                                      );
+                                    }));
+                              }else {
+                                Navigator.push((context),
+                                   MaterialPageRoute(builder: (context){
+                                     return TrainersForm3(
+                                         firstName,lastName,address,selectedGender,
+                                         selectedDate,selectedMonth,selectedYear,
+                                         linkedin,certifications,certificateSelectedDate,
+                                         certificateSelectedMonth,certificateSelectedYear,
+                                         achievements
+                                     );
+                                }));
+                              }
+                              // Navigator.push(context,
+                              //     MaterialPageRoute(builder: (context) {
+                              //       print(certificateSelectedYear);
+                              //       return TrainersForm2(
+                              //         //personalDetailsMap: personalDetail,
+                              //       );
+                              //     }));
                               //print(credentials.userId);
-
                             }
                           },
                           child: Container(

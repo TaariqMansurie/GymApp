@@ -4,10 +4,12 @@ import 'package:GymApp/Screens/Packages/platinum.dart';
 import 'package:GymApp/Screens/Packages/silver.dart';
 import 'package:GymApp/Screens/home.dart';
 import 'package:GymApp/Services/auth.dart';
-import 'package:GymApp/home2.dart';
+import 'package:GymApp/shared/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'Chat/chat.dart';
 import 'Trainings/list_of_trainings.dart';
@@ -22,8 +24,11 @@ class UserHome2 extends StatefulWidget {
 
 class _UserHome2State extends State<UserHome2> {
   final AuthService _auth = AuthService();
+  DocumentSnapshot data;
+
   @override
   Widget build(BuildContext context) {
+    String uid = Provider.of<User>(context).uid;
     return Scaffold(
       appBar: new AppBar(
         title: Text(
@@ -52,35 +57,93 @@ class _UserHome2State extends State<UserHome2> {
         child: const Icon(FontAwesomeIcons.rocketchat),
       ),
       drawer: UserNavigationDrawer(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 15.0,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:<Widget> [
-                Text(
-                  "Welcome back ! ",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(fontWeight: FontWeight.w900),textAlign: TextAlign.center,
+      body: StreamBuilder<DocumentSnapshot>(
+        stream: Firestore.instance
+            .collection('users')
+            .document(uid)
+            .snapshots(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot)  {
+          if (snapshot.hasData) {
+            print(snapshot.hasData);
+            print(snapshot.data['userName']);
+            String userName = snapshot.data['userName'];
+            String email = snapshot.data['userEmail'];
+            String profile_pic_url = snapshot.data['profile_photo_url'];
+            print({profile_pic_url});
+          return SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: 15.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:<Widget> [
+                    Text(
+                      "Welcome Back ${userName.toUpperCase()} !" ,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          .copyWith(fontWeight: FontWeight.w900),textAlign: TextAlign.center,
+                    ),
+
+                    //  SizedBox(width: 60.0,),
+
+                  ],
                 ),
+                SizedBox(height: 20.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Trainings we Offer",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              .copyWith(fontWeight: FontWeight.w900),
+                        ),
+                      ),
+                    ),
+                    ExploreAllButton3(
+                      onTap: () {
+                        Navigator.push(
+                          context, MaterialPageRoute(
+                            builder: (context) => Trainings()),
+                        );
+                      },
+                    ),
 
-                //  SizedBox(width: 60.0,),
-
-              ],
-            ),
-            SizedBox(height: 20.0,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+                  ],
+                ),
+                SizedBox(height: 20.0,),
+                Container(
+                  height: 290,
+                  width: MediaQuery.of(context).size.width,
+                  //child: SingleChildScrollView(
+                  // scrollDirection: Axis.horizontal,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        buildImageCard1(),
+                        buildImageCard2(),
+                        buildImageCard3(),
+                        buildImageCard4(),
+                        // Card(color: Colors.amber,),
+                        //  Card(color: Colors.green,)
+                      ],
+                    ),
+                  ),
+                  //),
+                ),
+                SizedBox(height: 20.0,),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10,0,0,0),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Trainings we Offer",
+                      "Our Packages",
                       style: Theme.of(context)
                           .textTheme
                           .headline5
@@ -88,91 +151,52 @@ class _UserHome2State extends State<UserHome2> {
                     ),
                   ),
                 ),
-                ExploreAllButton3(
-                  onTap: () {
-                    Navigator.push(
-                      context, MaterialPageRoute(
-                        builder: (context) => Trainings()),
-                    );
-                  },
-                ),
+                SizedBox(height: 10.0,),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                 // color: Colors.black,
+                  height: 150,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20), topRight: Radius.circular(20),bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20) )),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                        SilverPackage(),
+                        GoldPackage(),
+                       // buildPlatinumPackageCard(),
+                        ],
+                      ),
+                      SizedBox(height:10.0),
+                      Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                          PlatinumPackage(),
+                          //GoldPackage(),
+                         ],
+                      ),
+                    ],
 
+                  ),
+                ),
+                SizedBox(height: 20.0,),
+                Center(child: Image.asset('assets/meditation_bg.png')),
               ],
             ),
-            SizedBox(height: 20.0,),
-            Container(
-              height: 290,
-              width: MediaQuery.of(context).size.width,
-              //child: SingleChildScrollView(
-              // scrollDirection: Axis.horizontal,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    buildImageCard1(),
-                    buildImageCard2(),
-                    buildImageCard3(),
-                    buildImageCard4(),
-                    // Card(color: Colors.amber,),
-                    //  Card(color: Colors.green,)
-                  ],
-                ),
-              ),
-              //),
-            ),
-            SizedBox(height: 20.0,),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10,0,0,0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Our Packages",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(fontWeight: FontWeight.w900),
-                ),
-              ),
-            ),
-            SizedBox(height: 10.0,),
-            Container(
-              width: MediaQuery.of(context).size.width,
-             // color: Colors.black,
-              height: 150,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20), topRight: Radius.circular(20),bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20) )),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                    SilverPackage(),
-                    GoldPackage(),
-                   // buildPlatinumPackageCard(),
-                    ],
-                  ),
-                  SizedBox(height:10.0),
-                  Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                      PlatinumPackage(),
-                      //GoldPackage(),
-                     ],
-                  ),
-                ],
-
-              ),
-            ),
-            SizedBox(height: 20.0,),
-          ],
+          );
+          } else {
+            return Container();
+            }
+          },
         ),
-      ),
-    );
-  }
+      );
+    }
 
   // Widget _buildBottomNavigationBar() {
   //   List<String> bottomNavigationBarOptions = [

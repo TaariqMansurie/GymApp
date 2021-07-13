@@ -52,9 +52,22 @@ class DatabaseMethods{
     // .updateData();
   }
 
-  Future<void> addTrainerInfo (name, uid) async {
-    Firestore.instance.collection("users").document(uid).updateData({
-      "Trainer\'s Info": FieldValue.arrayUnion([name])
+  Future<void> addTrainerMaleInfo (name, uid, uidd) async {
+    Firestore.instance
+        .collection("users")
+        .document(uid)
+        .collection('maleTrainers')
+        .document(uidd).updateData({
+         "Male Trainer\'s Info": name.toString()
+    });
+  }
+
+  Future<void> addTrainerFemaleInfo (name, uid,uidd) async {
+    Firestore.instance
+        .collection("users")
+        .document(uid).collection('femaleTrainers')
+        .document(uidd).updateData({
+         "Female Trainer\'s Info": name.toString()
     });
   }
 
