@@ -14,17 +14,24 @@ class DietPlans extends StatefulWidget {
 }
 
 class _DietPlansState extends State<DietPlans> {
+  //jo bhi id hain voh sab yearly,quarterly ,etc plans ki same hi hain !
   List<Category> data = [
     Category(
       id: 1,
       name: 'POPULAR\n Plans',
       dietPlanList: <DietItem>[
         DietItem(
-            id: 1,
-            name: 'Yearly Plan',
+            id: 11,
+            name: 'Yearly Muscle Gain\nPlan',
             price: 50,
             imagePath: 'assets/pizza-1.png',
-            lock : FontAwesomeIcons.lock)
+            lock : FontAwesomeIcons.lock),
+        DietItem(
+            id: 10,
+            name: '6 Monthly Muscle Gain\nPlan',
+            price: 50,
+            imagePath: 'assets/pizza-1.png',
+            lock : FontAwesomeIcons.lock),
       //   DietItem(
       //       id: 2,
       //       name: 'Greek Shaurama',
@@ -35,38 +42,38 @@ class _DietPlansState extends State<DietPlans> {
     ),
     Category(
       id: 2,
-      name: 'MEAL DEALS',
+      name: 'Transformation Plan',
       dietPlanList: <DietItem>[
         DietItem(
             id: 2,
-            name: 'High Protein Meal',
+            name: '3 Month Plan',
             price: 12.99,
             imagePath: 'assets/pizza-2.png'),
         DietItem(
             id: 3,
-            name: 'Keto Meal',
+            name: '6 Month Plan',
             price: 12.99,
             imagePath: 'assets/hotdog.png'),
         DietItem(
             id: 4,
-            name: 'Vegan Meal',
+            name: 'Yearly Plan',
             price: 13.50,
             imagePath: 'assets/hotdog.png'),
-        DietItem(
-            id: 5,
-            name: 'Mexican Meal',
-            price: 12.99,
-            imagePath: 'assets/hotdog.png'),
-        DietItem(
-            id: 6,
-            name: 'Low Carbs Meal',
-            price: 12.99,
-            imagePath: 'assets/hamburger.png'),
+        // DietItem(
+        //     id: 5,
+        //     name: 'Mexican Meal',
+        //     price: 12.99,
+        //     imagePath: 'assets/hotdog.png'),
+        // DietItem(
+        //     id: 6,
+        //     name: 'Low Carbs Meal',
+        //     price: 12.99,
+        //     imagePath: 'assets/hamburger.png'),
       ],
     ),
     Category(
       id: 3,
-      name: 'Fat Loss\n Diet',
+      name: 'Fat Loss ',
       dietPlanList: <DietItem>[
         DietItem(
             id: 7,
@@ -78,6 +85,12 @@ class _DietPlansState extends State<DietPlans> {
             name: 'Quarterly Plan',
             price: 35.00,
             imagePath: 'assets/hamburger.png'),
+        DietItem(
+            id: 9,
+            name: '6 Monthly Plan',
+            price: 50,
+            imagePath: 'assets/pizza-1.png',
+            lock : FontAwesomeIcons.lock),
         DietItem(
             id: 1,
             name: 'Yearly Plan',
@@ -87,7 +100,7 @@ class _DietPlansState extends State<DietPlans> {
     ),
     Category(
       id: 4,
-      name: 'Muscle Gain\n Diet',
+      name: 'Muscle Gain ',
       dietPlanList: <DietItem>[
         DietItem(
             id: 7,
@@ -100,13 +113,19 @@ class _DietPlansState extends State<DietPlans> {
             price: 35.00,
             imagePath: 'assets/hamburger.png'),
         DietItem(
+            id: 9,
+            name: '6 Monthly Plan',
+            price: 50,
+            imagePath: 'assets/pizza-1.png',
+            lock : FontAwesomeIcons.lock),
+        DietItem(
             id: 1,
             name: 'Yearly Plan',
             price: 50.00,
             imagePath: 'assets/hamburger.png'),
-      ],
-      //yearly plan
-    ),
+        ],
+        //yearly plan
+      ),
     // Category(
     //   id: 4,
     //   name: 'PIZZAS',
@@ -241,16 +260,17 @@ class _DietPlansState extends State<DietPlans> {
             'Diet Plans'
         ),
         backgroundColor: Colors.deepPurple[500] ,
-        leading: IconButton(
-          icon: Icon(FontAwesomeIcons.arrowCircleLeft),
-          onPressed: () {
-            Navigator.pop(context) ;
-          },
-          color: Colors.black,
-          tooltip: 'Back',
-        ),
+        automaticallyImplyLeading: true,
+        // leading: IconButton(
+        //   icon: Icon(FontAwesomeIcons.arrowCircleLeft),
+        //   onPressed: () {
+        //     Navigator.pop(context) ;
+        //   },
+        //   color: Colors.black,
+        //   tooltip: 'Back',
+        // ),
       ),
-      backgroundColor: Colors.deepPurpleAccent,
+      backgroundColor: Colors.deepOrange[100],
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -259,12 +279,11 @@ class _DietPlansState extends State<DietPlans> {
             Image.asset(
               'assets/Chef.gif',
               height: 250,
-
             ),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Colors.deepPurple[50],
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -293,7 +312,7 @@ class _DietPlansState extends State<DietPlans> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Life Changerz',
+            'Fitnezz Den',
             style: GoogleFonts.varelaRound(
               fontSize: 25,
               fontWeight: FontWeight.w600,
@@ -303,7 +322,7 @@ class _DietPlansState extends State<DietPlans> {
             height: 10,
           ),
           Text(
-            'Changing LifeStyles SINCE 2002',
+            'Transforming Lives SINCE 2002',
             style: GoogleFonts.varelaRound(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,

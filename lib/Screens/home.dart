@@ -54,6 +54,7 @@ class _HomeState extends State<Home> {
       //     tooltip: 'Menu',
       // ),
       // ),
+      backgroundColor: Colors.white,
       bottomNavigationBar: _buildBottomNavigationBarr(),
       drawer: HiddenDrawer(),
       body: callPage(selectedOptionIndexx),

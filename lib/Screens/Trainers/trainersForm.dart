@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:GymApp/Model/gender.dart';
 import 'package:GymApp/Screens/Trainers/trainersForm2.dart';
 import 'package:GymApp/Screens/Trainers/trainersForm3.dart';
@@ -8,7 +10,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
 import 'afterFormSubmission.dart';
 
 class TrainerForm extends StatefulWidget {
@@ -17,6 +20,7 @@ class TrainerForm extends StatefulWidget {
 }
 
 class _TrainerFormState extends State<TrainerForm> {
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   DatabaseMethods db = DatabaseMethods();
 
@@ -39,6 +43,9 @@ class _TrainerFormState extends State<TrainerForm> {
   var certificateSelectedYear = '1999';
   final List<String> genderList = ['Male', 'Female'];
 
+
+  // PickedFile imageFile;
+  // final ImagePicker _picker = new ImagePicker();
 
   DropdownButton<String> androidDropdown() {
     List<DropdownMenuItem<String>> codes = [];
@@ -317,27 +324,75 @@ class _TrainerFormState extends State<TrainerForm> {
     );
   }
 
+  // Widget bottomSheet(String uid) {
+  //   return Container(
+  //     height: 100.0,
+  //     // width: MediaQuery.of(context).size.width,
+  //     margin: EdgeInsets.symmetric(
+  //       horizontal: 20,
+  //       vertical: 20,
+  //     ),
+  //     child: Column(
+  //       children: <Widget>[
+  //         Text(
+  //           'Choose a Profile Photo',
+  //           style: TextStyle(fontSize: 20.0),
+  //         ),
+  //         SizedBox(
+  //           height: 20.0,
+  //         ),
+  //         Row(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: <Widget>[
+  //             FlatButton.icon(
+  //                 onPressed: () {
+  //                   takePhoto(ImageSource.camera, uid);
+  //                 },
+  //                 icon: Icon(Icons.camera),
+  //                 label: Text('Camera')),
+  //             FlatButton.icon(
+  //                 onPressed: () {
+  //                   takePhoto(ImageSource.gallery, uid);
+  //                 },
+  //                 icon: Icon(Icons.image),
+  //                 label: Text('Gallery'))
+  //           ],
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
+  //
+  // void takePhoto(ImageSource source, String uid) async {
+  //   final pickedFile = await _picker.getImage(
+  //     source: source,
+  //   );
+  //   setState(() {
+  //     imageFile = pickedFile;
+  //   });
+  //   DatabaseMethods().uploadProfilePicToFirebase(uid, File(pickedFile.path));
+  // }
 
   @override
   Widget build(BuildContext context) {
     var uid = Provider.of<User>(context).uid;
     var uidd = Provider.of<User>(context).uidd;
-
-    CollectionReference ref = Firestore.instance
-        .collection('users')
-        .document(uid)
-        .collection('maleTrainers');
-
-    DocumentReference documentReference = Firestore.instance
-        .collection('users')
-        .document(uid)
-        .collection('maleTrainers')
-        .document(uidd);
-
-    CollectionReference reff = Firestore.instance
-        .collection('users')
-        .document(uid)
-        .collection('femaleTrainers');
+    //
+    // CollectionReference ref = Firestore.instance
+    //     .collection('users')
+    //     .document(uid)
+    //     .collection('maleTrainers');
+    //
+    // DocumentReference documentReference = Firestore.instance
+    //     .collection('users')
+    //     .document(uid)
+    //     .collection('maleTrainers')
+    //     .document(uidd);
+    //
+    // CollectionReference reff = Firestore.instance
+    //     .collection('users')
+    //     .document(uid)
+    //     .collection('femaleTrainers');
     
     var credentials = Provider.of<User>(context, listen: false);
     return Scaffold(
@@ -406,6 +461,7 @@ class _TrainerFormState extends State<TrainerForm> {
                   ],
                 ),
               ),
+
               Container(
                 decoration: BoxDecoration(
                   color: Colors.deepPurple[50],
@@ -418,6 +474,30 @@ class _TrainerFormState extends State<TrainerForm> {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
+                      // CircleAvatar(
+                      //   radius: 50.0,
+                      //   backgroundImage: imageFile == null
+                      //       ? AssetImage('assets/apple.png')
+                      //       : FileImage(File(imageFile.path))
+                      //   // NetworkImage(
+                      //   //     _imageFile.toString()), //(iska matlab yeh hain ki background image selected profile photo rahega gallery se liya hua and if voh nhi hua na toh normal default image rahega search.png valaa)
+                      // ),
+                      // Container(
+                      //   child: InkWell(
+                      //     child: Icon(
+                      //       Icons.camera_alt,
+                      //       color: Colors.teal,
+                      //       size: 28.0,
+                      //     ),
+                      //     onTap: () {
+                      //       showModalBottomSheet(
+                      //         context: context,
+                      //         builder: ((builder) => bottomSheet(uid)),
+                      //       );
+                      //     },
+                      //   ),
+                     //   alignment: Alignment(0.015, 0.0),
+                    //  ),
                       CustomInputField(
                         label: 'First Name',
                         isObscurred: false,
@@ -870,4 +950,5 @@ class _TrainerFormState extends State<TrainerForm> {
       ),
     );
   }
+
 }

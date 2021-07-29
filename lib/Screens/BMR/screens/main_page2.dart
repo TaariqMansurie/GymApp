@@ -1,4 +1,5 @@
 import 'package:GymApp/Drawers/homeNavigationDrawer.dart';
+import 'package:GymApp/Drawers/userNavigationDrawer.dart';
 import 'package:GymApp/Screens/BMR/components/background_card.dart';
 import 'package:GymApp/Screens/BMR/components/buttons.dart';
 import 'package:GymApp/Screens/BMR/components/calculations.dart';
@@ -15,12 +16,12 @@ enum GenderType {
   female,
 }
 
-class BmrHome extends StatefulWidget {
+class BmrHome2 extends StatefulWidget {
   @override
-  _BmrHomeState createState() => _BmrHomeState();
+  _BmrHome2State createState() => _BmrHome2State();
 }
 
-class _BmrHomeState extends State<BmrHome> {
+class _BmrHome2State extends State<BmrHome2> {
   GenderType selectedGender;
   int height = 160;
   int weight = 75;
@@ -39,7 +40,7 @@ class _BmrHomeState extends State<BmrHome> {
         ),
         automaticallyImplyLeading: true,
       ),
-      drawer: HiddenDrawer(),
+      drawer: UserNavigationDrawer(),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -198,9 +199,9 @@ class _BmrHomeState extends State<BmrHome> {
                       thumbColor: Colors.deepPurple[600],
                       overlayColor: Color(0x2900D1FF),
                       thumbShape:
-                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      RoundSliderThumbShape(enabledThumbRadius: 15.0),
                       overlayShape:
-                          RoundSliderOverlayShape(overlayRadius: 30.0),
+                      RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
                       value: height.toDouble(),

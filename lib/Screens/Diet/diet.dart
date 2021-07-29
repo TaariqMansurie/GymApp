@@ -1,9 +1,8 @@
-
-import 'package:GymApp/Widgets/top_meals.dart';
-import 'package:GymApp/Widgets/top_product_tile.dart';
+import 'package:GymApp/Drawers/homeNavigationDrawer.dart';
+import 'package:GymApp/Widgets/top_packages.dart';
+import 'package:GymApp/Widgets/top_plan.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'diet_plans.dart';
 
 class Diet extends StatefulWidget {
@@ -18,17 +17,19 @@ class _DietState extends State<Diet> {
       appBar: AppBar(
         title: Text('Diet'),
         backgroundColor: Colors.deepPurple[500],
+        automaticallyImplyLeading: true,
       ),
+      drawer: HiddenDrawer(),
       body: SingleChildScrollView(
         child: Container(
             child: Column(
               children: <Widget>[
                 Center(child: Text(
-                  "Transform Into A Better Version Of Yourself ! ",
+                  "Transform Into A Better Version Of \n                        Yourself ! ",
                   style: Theme.of(context)
                       .textTheme
-                      .headline4
-                      .copyWith(fontWeight: FontWeight.w900),textAlign: TextAlign.start,
+                      .headline5
+                      .copyWith(fontWeight: FontWeight.w900,color: Colors.black),textAlign: TextAlign.start,
                 ),),
                 buildTopProducts(),
                 buildTopMeals(),
@@ -65,7 +66,7 @@ class _DietState extends State<Diet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Top Packages',
+                  'Top Plans',
                   style: GoogleFonts.varelaRound(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -84,31 +85,36 @@ class _DietState extends State<Diet> {
           SizedBox(
             height: 20,
           ),
-          buildTopProductsList(),
-
+          buildTopPlanList(),
         ],
       ),
     );
   }
 
-  Widget buildTopProductsList() {
+  Widget buildTopPlanList() {
     List topProductList = [
-      TopProductTile(
+      TopPlanTile(
         assetPath: 'assets/apple.png',
         color: Color(0xffDFECF8),
         details: '\$50.00',
         title: 'Yearly Plan',
       ),
-      TopProductTile(
+      TopPlanTile(
+        assetPath: 'assets/apple.png',
         color: Color(0xffF4DEF8),
+        details: '\$50.00',
+        title: '6 - Month Plan',
+      ),
+      TopPlanTile(
+        color: Color(0xffFFF2C5),
         assetPath: 'assets/summer.png',
         title: 'Monthly Plan',
         details: '\$18.00',
       ),
-      TopProductTile(
-        color: Color(0xffFFF2C5),
+      TopPlanTile(
+        color: Color(0xffDFECF8),
         assetPath: 'assets/vegetable.png',
-        title: 'Quaterly Plan',
+        title: 'Quarterly Plan',
         details: '\$30.00',
       ),
     ];
@@ -142,7 +148,7 @@ class _DietState extends State<Diet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Top Meals',
+                  'Top Packages',
                   style: GoogleFonts.varelaRound(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -161,30 +167,30 @@ class _DietState extends State<Diet> {
           SizedBox(
             height: 20,
           ),
-           buildTopMealsList()
+          buildTopPackageList()
         ],
       ),
     );
   }
 
-  Widget buildTopMealsList() {
+  Widget buildTopPackageList() {
     List topProductList = [
-      TopMealTile(
+      TopPackageTile(
         assetPath: 'assets/vegetable.png',
         color: Color(0xffDFECF8),
         details: '\$12.99',
-        title: 'Keto Meal',
+        title: 'Transformation Package',
       ),
-      TopMealTile(
+      TopPackageTile(
         color: Color(0xffF4DEF8),
         assetPath: 'assets/summer.png',
-        title: 'High Protein Meal',
+        title: 'Fat Loss Package',
         details: '\$12.99',
       ),
-      TopMealTile(
+      TopPackageTile(
         color: Color(0xffFFF2C5),
         assetPath: 'assets/apple.png',
-        title: 'Vegan Meal',
+        title: 'Muscle Gain Package',
         details: '\$13.50',
       ),
     ];

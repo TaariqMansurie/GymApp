@@ -7,8 +7,6 @@ import 'package:camera/camera.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
 
-
-
 List<CameraDescription> cameras;
 
 class Profile extends StatefulWidget {
@@ -28,6 +26,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     String uid = Provider.of<User>(context).uid;
+    String uidd = Provider.of<User>(context).uidd;
     print(uid);
     return uid.isNotEmpty
         ? Scaffold(
@@ -42,8 +41,8 @@ class _ProfileState extends State<Profile> {
                   print(snapshot.data['userName']);
                   String userName = snapshot.data['userName'];
                   String email = snapshot.data['userEmail'];
-                  String profile_pic_url = snapshot.data['profile_photo_url'];
-                  print({profile_pic_url});
+                  String profilePicUrl = snapshot.data['profile_photo_url'];
+                  print({profilePicUrl});
 
                   return Stack(
                     children: <Widget>[
@@ -53,12 +52,7 @@ class _ProfileState extends State<Profile> {
                               gradient: LinearGradient(colors: [
                                 Colors.deepPurple[400],
                                 Colors.deepPurple[800],
-                              ])
-                    //         gradient: LinearGradient(
-                    //         colors: [
-                    // Colors.deepPurple[400],
-                    // Colors.deepPurple[800]
-                    // ],
+                              ]),
                             ),),
                             //color: Colors.blue[800]),
                         clipper: getClipper(),
@@ -70,10 +64,10 @@ class _ProfileState extends State<Profile> {
                             children: <Widget>[
                               CircleAvatar(
                                 radius: 80.0,
-                                backgroundImage: profile_pic_url == null
+                                backgroundImage: profilePicUrl == null
                                     ? AssetImage('assets/search.png')
                                     : NetworkImage(
-                                        profile_pic_url), //(iska matlab yeh hain ki background image selected profile photo rahega gallery se liya hua and if voh nhi hua na toh normal default image rahega search.png valaa)
+                                        profilePicUrl), //(iska matlab yeh hain ki background image selected profile photo rahega gallery se liya hua and if voh nhi hua na toh normal default image rahega search.png valaa)
                               ),
                               //camera
                               Container(
@@ -142,27 +136,6 @@ class _ProfileState extends State<Profile> {
                                     ),
                                   )),
                               SizedBox(height: 25.0), //logout
-                              // Container(
-                              //     //abhi jaayega photu firebase ke database mein
-                              //     height: 30.0,
-                              //     width: 95.0,
-                              //     child: Material(
-                              //       borderRadius: BorderRadius.circular(20.0),
-                              //       shadowColor: Colors.redAccent,
-                              //       color: Colors.green[600],
-                              //       elevation: 18.0,
-                              //       child: GestureDetector(
-                              //         onTap: () {},
-                              //         child: Center(
-                              //           child: Text(
-                              //             'Submit',
-                              //             style: TextStyle(
-                              //                 color: Colors.white,
-                              //                 fontFamily: 'Montserrat'),
-                              //           ),
-                              //         ),
-                              //       ),
-                              //     ))
                             ],
                           ))
                     ],

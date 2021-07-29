@@ -95,7 +95,7 @@ class _RegisterState extends State<Register> {
           .registerWithEmailAndPassword(
           emailEditingController.text, passwordEditingController.text)
           .then((result) async {
-        if (result != null) {
+        if (result != null && selectedGender != null) {
           Map<String, String> userDataMap = {
             "userName": usernameEditingController.text,
             "userEmail": emailEditingController.text,
@@ -109,7 +109,14 @@ class _RegisterState extends State<Register> {
               usernameEditingController.text);
           print(userDataMap);
           await databaseMethods.addUserInfo(userDataMap);
-
+          //
+          // if(selectedGender != 'Female'){
+          //   Navigator.pushReplacement(
+          //       context, MaterialPageRoute(builder: (context) => MaleUserHome()));
+          // }else{
+          //   Navigator.pushReplacement(
+          //       context, MaterialPageRoute(builder: (context) => FemaleUserHome()));
+          // }
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => UserHome()));
         }

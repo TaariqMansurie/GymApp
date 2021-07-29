@@ -1,3 +1,4 @@
+import 'package:GymApp/Drawers/adminNavigationDrawer.dart';
 import 'package:flutter/material.dart';
 
 class CrossFit extends StatelessWidget {
@@ -7,9 +8,12 @@ class CrossFit extends StatelessWidget {
         appBar: AppBar(
           title: Text('Crossfit'),
           backgroundColor: Colors.deepPurple[500],
+          automaticallyImplyLeading: true,
         ),
         body: Center(
           child: Text('Crossfit Page'),
-        ));
+        ),
+      drawer: UserNavigationDrawer(),
+    );
   }
 }

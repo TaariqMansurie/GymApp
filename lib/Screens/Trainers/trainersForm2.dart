@@ -1,13 +1,38 @@
 //male trainers ka form hain yeh
 
+import 'dart:io';
+
 import 'package:GymApp/Screens/Trainers/afterFormSubmission.dart';
 import 'package:GymApp/Services/database.dart';
+import 'package:GymApp/shared/constants.dart';
 import 'package:GymApp/shared/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+Future uploadProfilePicToFirebaseMale(String uid,String uidd, File image) async {
+  final ref = FirebaseStorage.instance
+      .ref()
+      .child('profile_pictures')
+      .child(uid + '.jpg');
+
+  var snapshot = await ref.putFile(image).onComplete;
+  var downloadUrl = await snapshot.ref.getDownloadURL();
+  print(downloadUrl);
+
+  // Firestore.instance
+  //     .collection("users")
+  //     .document(uid)
+  //     .collection('maleTrainers')
+  //     .document(uid)
+  //     .setData({'profile_pic_url_tm' : downloadUrl},merge: true);
+  // .updateData({"profile_photo_url": downloadUrl});
+  // .updateData();
+}
 class TrainersForm2 extends StatefulWidget {
   var firstName = TextEditingController();
   var lastName = TextEditingController();
@@ -33,6 +58,7 @@ class TrainersForm2 extends StatefulWidget {
   //     String certificateSelectedDate, String certificateSelectedMonth,
   //     String certificateSelectedYear, TextEditingController achievements);
 
+
   TrainersForm2(this.firstName,this.lastName,this.address,
       this.selectedGender,this.selectedDate,this.selectedMonth,
       this.selectedYear,this.linkedin,this.certifications,
@@ -44,29 +70,14 @@ class TrainersForm2 extends StatefulWidget {
 }
 
 class _TrainersForm2State extends State<TrainersForm2> {
-  // var firstName = TextEditingController();
-  // var lastName = TextEditingController();
-  // var address = TextEditingController();
-  // var linkedin = TextEditingController();
-  // //var github = TextEditingController();
-  // var certifications = TextEditingController();
-  // // var doc = TextEditingController();
-  // var achievements = TextEditingController();
-  //
-  // var selectedGender = 'Female';
-  // var selectedDate = '06';
-  // var selectedMonth = '05';
-  // var selectedYear= '1998';
-  //
-  // var certificateSelectedDate = '09';
-  // var certificateSelectedMonth = '07';
-  // var certificateSelectedYear = '1999';
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final List<String> maleExperienceList = ['2+ Years', '4+ Years', '8+ Years'];
   var maleExperience = '2+ Years';
   DatabaseMethods db = DatabaseMethods();
+  PickedFile imageFile;
+  final ImagePicker _picker = new ImagePicker();
 
   DropdownButton<String> maleExperienceDropdown() {
     List<DropdownMenuItem<String>> codes1 = [];
@@ -102,14 +113,62 @@ class _TrainersForm2State extends State<TrainersForm2> {
       },
     );
   }
+
+  Widget bottomSheet(String uid,String uidd) {
+    return Container(
+      height: 100.0,
+      // width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Choose a Profile Photo',
+            style: TextStyle(fontSize: 20.0),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.camera, uid);
+                  },
+                  icon: Icon(Icons.camera),
+                  label: Text('Camera')),
+              FlatButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.gallery, uid);
+                  },
+                  icon: Icon(Icons.image),
+                  label: Text('Gallery'))
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source, String uid) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      imageFile = pickedFile;
+    });
+    DatabaseMethods().uploadMaleTrainerProfile(uid, File(pickedFile.path));
+  }
+
   @override
   Widget build(BuildContext context) {
     var uid = Provider.of<User>(context).uid;
     var uidd = Provider.of<User>(context).uidd;
-
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     CollectionReference ref = Firestore.instance
-        .collection('users')
-        .document(uid)
         .collection('maleTrainers');
 
     // DocumentReference reffff = Firestore.instance
@@ -207,6 +266,41 @@ class _TrainersForm2State extends State<TrainersForm2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                            'Choose your profile photo first :-',
+                            style: GoogleFonts.rubik(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14,
+                            ),
+                          ),
+                          SizedBox(height: 20,),
+                          Center(
+                            child: CircleAvatar(
+                              radius: 50.0,
+                              backgroundImage: imageFile == null
+                                  ? AssetImage('assets/apple.png')
+                                  : FileImage(File(imageFile.path))
+                              // NetworkImage(
+                              //     _imageFile.toString()), //(iska matlab yeh hain ki background image selected profile photo rahega gallery se liya hua and if voh nhi hua na toh normal default image rahega search.png valaa)
+                            ),
+                          ),
+                          Container(
+                            child: InkWell(
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: Colors.teal,
+                                size: 28.0,
+                              ),
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: ((builder) => bottomSheet(uid,uidd)),
+                                );
+                              },
+                            ),
+                            alignment: Alignment(0.015, 0.0),
+                           ),
+                          SizedBox(height: 20,),
+                          Text(
                             'Experience',
                             style: GoogleFonts.rubik(
                               fontWeight: FontWeight.w500,
@@ -268,6 +362,7 @@ class _TrainersForm2State extends State<TrainersForm2> {
                               //     certificateSelectedYear,
                               // 'Achievements' : achievements.text.toString(),
                               'Experience': maleExperience.toString(),
+                              'profile_pic_url_tm' : DatabaseMethods.urlll.toString(),
                             };
                             // if(selectedGender != 'Female'){
                             //   // db.addTrainerMaleInfo({
@@ -323,7 +418,7 @@ class _TrainersForm2State extends State<TrainersForm2> {
                             //         return TrainersForm3();
                             //       }));
                             // }
-                            if( widget.selectedGender != null){
+                            if( imageFile != null){
                               // db.addTrainerMaleInfo({
                               //   'Experience': maleExperience.toString(),
                               // }, uid, uidd);
@@ -352,6 +447,7 @@ class _TrainersForm2State extends State<TrainersForm2> {
                                         widget.certificateSelectedYear,
                                     'Achievements' : widget.achievements.text.toString(),
                                     'Experience' : maleExperience.toString(),
+                                    'profile_pic_url_tm': purl.toString(),
                                 }).whenComplete(() => print('Hogaya male'));
                               Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
@@ -363,7 +459,12 @@ class _TrainersForm2State extends State<TrainersForm2> {
                                 )
                               );
                             }else{
-                              Center(child: Text('some error happened, kindly resend the form'),);
+                            Fluttertoast.showToast(
+                              msg: 'some error happened, kindly resend the form, Also check the profile picture',
+                              backgroundColor: Colors.deepPurple[400],
+                              textColor: Colors.black,
+                              toastLength: Toast.LENGTH_LONG,
+                             );
                             }
                             //print(credentials.userId);
 

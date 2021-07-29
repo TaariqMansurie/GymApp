@@ -1,5 +1,6 @@
 import 'dart:math';
-
+import 'package:GymApp/Drawers/homeNavigationDrawer.dart';
+import 'package:GymApp/Screens/fitnessBlogs.dart';
 import 'package:GymApp/shared/users.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'Screens/Diet/diet.dart';
 import 'Screens/Trainings/crossfit.dart';
 import 'Screens/Trainings/list_of_trainings.dart';
@@ -43,7 +43,7 @@ class _Home2State extends State<Home2> {
 
   @override
   Widget build(BuildContext context) {
-    String uid = Provider.of<User>(context).uid;
+   // String uid = Provider.of<User>(context).uid;
     var size = MediaQuery.of(context)
         .size;
     return Scaffold(
@@ -52,13 +52,14 @@ class _Home2State extends State<Home2> {
         title: Text(
             'Welcome to Fitnezz Den'
         ),
-        backgroundColor: Colors.deepPurple[500] ,
-        leading: IconButton(
-          icon: Icon(FontAwesomeIcons.gripLines),
-          onPressed: () {},
-          color: Colors.black,
-          tooltip: 'Menu',
-        ),
+        backgroundColor: Colors.deepPurple[500],
+        automaticallyImplyLeading: true,
+        // leading: IconButton(
+        //   icon: Icon(FontAwesomeIcons.gripLines),
+        //   onPressed: () {},
+        //   color: Colors.black,
+        //   tooltip: 'Menu',
+        // ),
       ),
       body: SingleChildScrollView(
         child:  Stack(
@@ -67,7 +68,8 @@ class _Home2State extends State<Home2> {
                     // Here the height of the container is 45% of our total height
                     height: size.height * .45,
                     decoration: BoxDecoration(
-                      color: Color(0xFFF5CEB8),
+                     // color: Color(0xFFF5CEB8),
+                      color: Colors.deepPurple[50],
                       image: DecorationImage(
                         alignment: Alignment.centerLeft,
                         image: AssetImage("assets/undraw_pilates_gpdb.png"),
@@ -91,7 +93,7 @@ class _Home2State extends State<Home2> {
                               height: 52,
                               width: 52,
                               decoration: BoxDecoration(
-                                  color: Color(0xFFF2BEA1),
+                                  color: Colors.deepPurple[500],
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                       alignment: Alignment.centerLeft,
@@ -562,6 +564,7 @@ class _Home2State extends State<Home2> {
                             }).toList(),
                           ),
 
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: map<Widget>(transformationList, (index, url) {
@@ -579,6 +582,49 @@ class _Home2State extends State<Home2> {
 
                           ),
 
+                          SizedBox(height:20.0,),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Daily Fitness Updates " ,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline5
+                                    .copyWith(fontWeight: FontWeight.w900),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 20,),
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => FitnessBlogs()
+                                )
+                              );
+                            },
+                            child: Container(
+                              height: 70,
+                              width: MediaQuery.of(context).size.width,
+                              //color: Colors.black,
+                              padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                              decoration: BoxDecoration(
+                                color: Colors.deepPurple[50],
+                                border: Border.all(color: Colors.deepPurple[400]),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Center(
+                                child: Text('Click here to view daily fitness updates.',
+                                  style: GoogleFonts.montserrat(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 20,),
                           Center(child: Image.asset('assets/meditation_bg.png')),
 
                           // Text(
@@ -671,7 +717,9 @@ class _Home2State extends State<Home2> {
                   ),
                 ],
               ),
-            ));
+            ),
+      drawer: HiddenDrawer(),
+    );
   }
 }
 

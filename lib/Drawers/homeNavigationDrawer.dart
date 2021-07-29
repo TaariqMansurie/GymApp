@@ -290,6 +290,7 @@ import 'package:GymApp/Screens/BMR/screens/main_page.dart';
 import 'package:GymApp/about_us.dart';
 import 'package:GymApp/Screens/BMII/landing_screen.dart';
 import 'package:GymApp/Screens/home.dart';
+import 'package:GymApp/contact_us.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -428,7 +429,7 @@ class HiddenDrawer extends StatelessWidget{
               ListTile(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutUs()));
+                      MaterialPageRoute(builder: (context) => ContactUs()));
                 },
                 leading: Icon(
                   Icons.person,size: 30.0,

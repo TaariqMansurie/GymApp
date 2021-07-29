@@ -71,48 +71,59 @@ class _ChatState extends State<Chat> {
       },
     );
   }
-   
-     void _popupDialog(BuildContext context) {
-       
-    Widget cancelButton = FlatButton(
-      child: Text("Cancel"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-    Widget startButton = FlatButton(
-      child: Text("Start"),
-      onPressed: () async {
-        // if (_groupName != null) {
-        //   await HelperFunctions.getUserNameSharedPreference().then((val) {
-        //     DatabaseMethods(uid: _user.uid).createGroup(val, _groupName);
-        //   });
-        //   Navigator.of(context).pop();
-        // }
-      },
-    );
 
-    // Create groups ka dialog box
-
-    AlertDialog alert = AlertDialog(
-      title: Text("Start your Conversation"),
-      content: Text('Do you want to start this conversation !? '),
-      // content: TextField(
-      //     onChanged: (val) {
-      //      // _groupName = val;
-      //     },
-      //     style: TextStyle(fontSize: 15.0, height: 2.0, color: Colors.black)),
-      actions: [
-        cancelButton,
-        startButton,
-      ],
-    );
-
+  void _alertDialog() {
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            elevation: 30,
+            title: Text("Start your conversation"),
+            titleTextStyle: TextStyle(
+                fontSize: 25,
+                backgroundColor: Colors.white,
+                color: Colors.black
+            ),
+            content: Text(
+                "Do you want to start this conversation ?"),
+            buttonPadding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Cancel"),
+                textColor: Colors.black,
+                color: Colors.deepPurple[400],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                onPressed: () {
+                  //Navigator.pop(context);
+                  Navigator.of(context).pop();
+                },
+              ),
+              FlatButton(
+                child: Text("Start"),
+                textColor: Colors.black,
+                color: Colors.deepPurple[400],
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                onPressed: () {
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => ClientRules()));
+                },
+              ),
+              // FlatButton(
+              //   child: Text("Trainers"),
+              //   textColor: Colors.black,
+              //   color: Colors.deepPurple[400],
+              //   shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(20)),
+              //   onPressed: () {
+              //     Navigator.push(context, MaterialPageRoute(builder: (context) => TrainersRulesAndRegulations()));
+              //   },
+              // ),
+            ],
+          );
+        }
     );
   }
 
@@ -125,7 +136,7 @@ class _ChatState extends State<Chat> {
           children: <Widget>[
             GestureDetector(
                 onTap: () {
-                  _popupDialog(context);
+                  _alertDialog();
                 },
                 child: Icon(Icons.add_circle,
                     color: Colors.deepPurple[400], size: 75.0)),
@@ -178,7 +189,7 @@ class _ChatState extends State<Chat> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _popupDialog(context);
+          _alertDialog();
         },
         child: Icon(Icons.add, color: Colors.white, size: 30.0),
         backgroundColor: Colors.deepPurple[800],

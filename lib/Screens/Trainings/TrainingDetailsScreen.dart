@@ -1,11 +1,13 @@
+import 'package:GymApp/Screens/ClientBodyMeasurements.dart';
 import 'package:GymApp/Widgets/bottom_nav_bar.dart';
 import 'package:GymApp/Widgets/search_bar.dart';
 import 'package:GymApp/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
-class DetailsScreen extends StatelessWidget {
+class TrainingDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -34,7 +36,7 @@ class DetailsScreen extends StatelessWidget {
                       height: size.height * 0.05,
                     ),
                     Text(
-                      "Meditation",
+                      "Training",
                       style: Theme.of(context)
                           .textTheme
                           .headline4
@@ -42,21 +44,45 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "3-10 MIN Course",
+                      "1 Hour Course",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10),
                     SizedBox(
                       width: size.width * .6, // it just take 60% of total width
                       child: Text(
-                        "Live happier and healthier by learning the fundamentals of meditation and mindfulness",
+                        "Live happier and healthier by learning the fundamentals of training and conditioning. ",
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    SizedBox(
+                      height: 40,
+                      child: InkWell(
+                        onTap: (){
+                          print('done');
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ClientBodyMeasurements()));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(child: Text('Input your Weight & body\n       measurements.',
+                                style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black
+                                ),
+                          )) ,
+                          width: size.width* .5 ,
+                        ),
                       ),
                     ),
                     // SizedBox(
                     //   width: size.width * .5, // it just take the 50% width
                     //   child: SearchBar(),
                     // ),
-                    SizedBox(width: size.width * .5,height: size.width * .125,),
+                    SizedBox(width: size.width * .5,height: size.width * .1,),
                     Wrap(
                       spacing: 20,
                       runSpacing: 20,
@@ -500,7 +526,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      "Meditation",
+                      "Training",
                       style: Theme.of(context)
                           .textTheme
                           .headline6
@@ -538,7 +564,7 @@ class DetailsScreen extends StatelessWidget {
                                   "Basic 2",
                                   style: Theme.of(context).textTheme.subtitle,
                                 ),
-                                Text("Start your deepen you practice")
+                                Text("Start your ultimate journey with us")
                               ],
                             ),
                           ),

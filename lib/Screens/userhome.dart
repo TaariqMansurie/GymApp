@@ -32,7 +32,7 @@ class _UserHomeState extends State<UserHome> {
         return CrossFit();
         break;
       case 4:
-        return RulesAndRegulations();
+        return TrainersRulesAndRegulations();
       default:
         return Chat();
     }

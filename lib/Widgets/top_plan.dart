@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TopProductTile extends StatelessWidget {
+class TopPlanTile extends StatelessWidget {
   final Color color;
   final String title;
   final String assetPath;
   final String details;
 
-  const TopProductTile(
+  const TopPlanTile(
       {Key key, this.color, this.title, this.assetPath, this.details})
       : super(key: key);
 
@@ -20,6 +20,7 @@ class TopProductTile extends StatelessWidget {
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
           bottomRight: Radius.circular(10),
+          bottomLeft: Radius.circular(10),
         ),
       ),
       height: 80,
@@ -37,6 +38,7 @@ class TopProductTile extends StatelessWidget {
                   height: 80,
                   width: 80,
                 ),
+                SizedBox(height: 10,),
                 Text(
                   this.title,
                   style: GoogleFonts.varelaRound(

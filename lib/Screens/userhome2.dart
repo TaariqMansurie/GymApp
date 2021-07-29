@@ -2,6 +2,7 @@ import 'package:GymApp/Drawers/userNavigationDrawer.dart';
 import 'package:GymApp/Screens/Packages/gold.dart';
 import 'package:GymApp/Screens/Packages/platinum.dart';
 import 'package:GymApp/Screens/Packages/silver.dart';
+import 'package:GymApp/Screens/fitnessBlogs.dart';
 import 'package:GymApp/Screens/home.dart';
 import 'package:GymApp/Services/auth.dart';
 import 'package:GymApp/shared/users.dart';
@@ -68,10 +69,14 @@ class _UserHome2State extends State<UserHome2> {
             print(snapshot.data['userName']);
             String userName = snapshot.data['userName'];
             String email = snapshot.data['userEmail'];
-            String profile_pic_url = snapshot.data['profile_photo_url'];
-            print({profile_pic_url});
+            var profilePicUrl;
+            profilePicUrl = snapshot.data['profile_photo_url'];
+            print({profilePicUrl});
           return SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 15.0,),
                 Row(
@@ -186,7 +191,51 @@ class _UserHome2State extends State<UserHome2> {
                   ),
                 ),
                 SizedBox(height: 20.0,),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Daily Fitness Updates " ,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5
+                          .copyWith(fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20,),
+                InkWell(
+                  onTap: (){
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => FitnessBlogs()
+                    )
+                    );
+                  },
+                  child: Container(
+                    height: 70,
+                    width: MediaQuery.of(context).size.width,
+                    //color: Colors.black,
+                    padding: const EdgeInsets.fromLTRB(10,0,0,0),
+                    decoration: BoxDecoration(
+                      color: Colors.deepPurple[50],
+                      border: Border.all(color: Colors.deepPurple[400]),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text('Click here to view daily fitness updates.',
+                        style: GoogleFonts.montserrat(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20,),
                 Center(child: Image.asset('assets/meditation_bg.png')),
+                SizedBox(height: 20.0,),
+
               ],
             ),
           );

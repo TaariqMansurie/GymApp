@@ -1,4 +1,5 @@
 import 'package:GymApp/Drawers/homeNavigationDrawer.dart';
+import 'package:GymApp/Drawers/userNavigationDrawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -24,12 +25,12 @@ enum Gender {
   female,
 }
 
-class InputPage extends StatefulWidget {
+class InputPage2 extends StatefulWidget {
   @override
-  _InputPageState createState() => _InputPageState();
+  _InputPage2State createState() => _InputPage2State();
 }
 
-class _InputPageState extends State<InputPage> {
+class _InputPage2State extends State<InputPage2> {
   Gender selectedGender;
   int height = 180;
   int weight = 60;
@@ -42,7 +43,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
         automaticallyImplyLeading: true,
       ),
-      drawer: HiddenDrawer(),
+      drawer: UserNavigationDrawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -224,9 +225,9 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-         // TransitionDot(animation: _submitAnimationController),
+          // TransitionDot(animation: _submitAnimationController),
 
-        //  _buildBottom(context),
+          //  _buildBottom(context),
           Padding(
             padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
             child: RaisedButton(
@@ -235,42 +236,42 @@ class _InputPageState extends State<InputPage> {
               hoverColor: Color(0x29EB1555),
               hoverElevation: 5,
               child: Text('CALCULATE',style: TextStyle(
-                color: Colors.black
+                  color: Colors.black
               ),),
               onPressed: () {
                 CalculatorBrain calc =
                 CalculatorBrain(height: height, weight: weight);
                 if (selectedGender == null) {
-                showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                return AlertDialog(
-                title: Text("Warning!"),
-                content: Text(
-                "You did not choose gender in this beautiful application. You should select gender."),
-                actions: <Widget>[
-                   FlatButton(
-                     child: Text("Close"),
-                     onPressed: () {
-                     Navigator.of(context).pop();
-                          },
-                         ),
-                       ],
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Warning!"),
+                        content: Text(
+                            "You did not choose gender in this beautiful application. You should select gender."),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("Close"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
                       );
                     },
                   );
                 } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultsPage(
-                      bmiResult: calc.calculateBMI(),
-                      resultText: calc.getResult(),
-                      interpretation: calc.getInterpretation(),
-                         ),
-                       ),
-                     );
-                   }
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultsPage(
+                        bmiResult: calc.calculateBMI(),
+                        resultText: calc.getResult(),
+                        interpretation: calc.getInterpretation(),
+                      ),
+                    ),
+                  );
+                }
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
@@ -304,9 +305,9 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
-  // void onPacmanSubmit() {
-  //   _submitAnimationController.forward();
-  // }
+// void onPacmanSubmit() {
+//   _submitAnimationController.forward();
+// }
 
 }
 class Dot extends StatelessWidget {

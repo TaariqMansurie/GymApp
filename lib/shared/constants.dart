@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 
 
 //BMR
-
+Map<String,dynamic> purl ;
 
 const Color kAppBarColor = Color(0xFF792CEF);
 //const Color kAppBarColor = Color(Colors.deepPurple[800])
@@ -187,3 +187,7 @@ class ColorConstants{
   //static const primaryColor = const Color((0xffF79352);
     static const primaryColor = const Color(0xff130801) ;
 }
+
+// class GlobalConstants{
+//   Map<String, dynamic> purl ;
+// }

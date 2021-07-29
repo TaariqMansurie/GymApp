@@ -1,7 +1,15 @@
+import 'package:GymApp/Screens/BMII/landing_screen2.dart';
+import 'package:GymApp/Screens/BMII/landing_screen.dart';
+import 'package:GymApp/Screens/BMR/screens/main_page.dart';
+import 'package:GymApp/Screens/BMR/screens/main_page2.dart';
+import 'package:GymApp/Screens/Payment/razorpay_payment.dart';
+import 'package:GymApp/Screens/userhome2.dart';
+import 'package:GymApp/home2.dart';
 import 'package:GymApp/shared/users.dart';
 import 'package:GymApp/userProfile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:provider/provider.dart';
 
@@ -25,8 +33,8 @@ class UserNavigationDrawer extends StatelessWidget {
                   print(snapshot.data['userName']);
                   String userName = snapshot.data['userName'];
                   String email = snapshot.data['userEmail'];
-                  String profile_pic_url = snapshot.data['profile_photo_url'];
-                  print({profile_pic_url});
+                  String profilePicUrl = snapshot.data['profile_photo_url'];
+                  print({profilePicUrl});
                   return SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: Theme(
@@ -66,9 +74,9 @@ class UserNavigationDrawer extends StatelessWidget {
                                             context, MaterialPageRoute(builder : (context) => Profile()),); },
                                           child: CircleAvatar(
                                             child: Text(''),
-                                            backgroundImage: profile_pic_url == null
+                                            backgroundImage: profilePicUrl == null
                                                 ? AssetImage('assets/apple.png')
-                                                : NetworkImage(profile_pic_url),
+                                                : NetworkImage(profilePicUrl),
                                           ),
                                         ),
                                       ),
@@ -107,7 +115,28 @@ class UserNavigationDrawer extends StatelessWidget {
                                 // ),
                               ),
                               ListTile(
-                                leading: Icon(Icons.person),
+                                leading: Icon(
+                                  FontAwesomeIcons.home,
+                                  color: Colors.black,
+                                ),
+                                title: Text(
+                                  'Home',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                hoverColor: Colors.blue[200],
+                                focusColor: Colors.blue[200],
+                                onTap: () {
+                                  Navigator.push(
+                                    context, MaterialPageRoute(builder : (context) => UserHome2()),
+                                  );
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.person,
+                                    color: Colors.black
+                                ),
                                 title: Text(
                                   'Profile',
                                   style: TextStyle(
@@ -123,17 +152,85 @@ class UserNavigationDrawer extends StatelessWidget {
                                 },
                               ),
                               ListTile(
-                                leading: Icon(Icons.settings),
+                                leading: Icon(Icons.monetization_on,
+                                  color: Colors.black,
+                                ),
                                 title: Text(
-                                  'Settings',
+                                  'Payments',
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
                                 ),
-                                onTap: null,
+                                hoverColor: Colors.blue[200],
+                                focusColor: Colors.blue[200],
+                                onTap: () {
+                                  Navigator.push(
+                                    context, MaterialPageRoute(builder : (context) => RazorpayPayment()),
+                                  );
+                                },
+                              ),
+                              SizedBox(height: 10,),
+                              Divider(
+                                height: 1,
+                                thickness: 2,color: Colors.black38,
                               ),
                               ListTile(
-                                leading: Icon(Icons.stars),
+                                leading: Icon(
+                                  FontAwesomeIcons.calculator,
+                                  color: Colors.black,
+                                ),
+                                title: Text(
+                                  'BMI',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                hoverColor: Colors.blue[200],
+                                focusColor: Colors.blue[200],
+                                onTap: () {
+                                  Navigator.push(
+                                    context, MaterialPageRoute(builder : (context) => BMICalculator2()),
+                                  );
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  FontAwesomeIcons.stickyNote,
+                                  color: Colors.black,
+                                ),
+                                title: Text(
+                                  'BMR',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                hoverColor: Colors.blue[200],
+                                focusColor: Colors.blue[200],
+                                onTap: () {
+                                  Navigator.push(
+                                    context, MaterialPageRoute(builder : (context) => BmrHome2()),
+                                  );
+                                },
+                              ),
+                              // ListTile(
+                              //   leading: Icon(Icons.settings),
+                              //   title: Text(
+                              //     'Settings',
+                              //     style: TextStyle(
+                              //       fontSize: 18,
+                              //     ),
+                              //   ),
+                              //   onTap: null,
+                              // ),
+                              Divider(
+                                height: 1,
+                                thickness: 2,color: Colors.black38,
+                              ),
+                              SizedBox(height: 10,),
+                              ListTile(
+                                leading: Icon(Icons.stars,
+                                    color: Colors.black
+                                ),
                                 title: Text(
                                   'Rate Us',
                                   style: TextStyle(

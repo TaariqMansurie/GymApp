@@ -1,10 +1,14 @@
 //female trainers ka form hain yeh
 
+import 'dart:io';
+
 import 'package:GymApp/Services/database.dart';
 import 'package:GymApp/shared/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import 'afterFormSubmission.dart';
@@ -39,27 +43,12 @@ class TrainersForm3 extends StatefulWidget {
 }
 
 class _TrainersForm3State extends State<TrainersForm3> {
-  // var firstName = TextEditingController();
-  // var lastName = TextEditingController();
-  // var address = TextEditingController();
-  // var linkedin = TextEditingController();
-  // //var github = TextEditingController();
-  // var certifications = TextEditingController();
-  // // var doc = TextEditingController();
-  // var achievements = TextEditingController();
-  //
-  // var selectedGender = 'Female';
-  // var selectedDate = '06';
-  // var selectedMonth = '05';
-  // var selectedYear= '1998';
-  //
-  // var certificateSelectedDate = '09';
-  // var certificateSelectedMonth = '07';
-  // var certificateSelectedYear = '1999';
 
   final List<String> femaleExperienceList = ['2+ Years', '4+ Years'];
   var femaleExperience = '2+ Years';
   DatabaseMethods db = DatabaseMethods();
+  PickedFile imageFile;
+  final ImagePicker _picker = new ImagePicker();
 
   DropdownButton<String> femaleExperienceDropdown() {
     List<DropdownMenuItem<String>> codes2 = [];
@@ -95,16 +84,63 @@ class _TrainersForm3State extends State<TrainersForm3> {
       },
     );
   }
+
+  Widget bottomSheet(String uid,String uidd) {
+    return Container(
+      height: 100.0,
+      // width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Choose a Profile Photo',
+            style: TextStyle(fontSize: 20.0),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.camera, uid);
+                  },
+                  icon: Icon(Icons.camera),
+                  label: Text('Camera')),
+              FlatButton.icon(
+                  onPressed: () {
+                    takePhoto(ImageSource.gallery, uid);
+                  },
+                  icon: Icon(Icons.image),
+                  label: Text('Gallery'))
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  void takePhoto(ImageSource source, String uid) async {
+    final pickedFile = await _picker.getImage(
+      source: source,
+    );
+    setState(() {
+      imageFile = pickedFile;
+    });
+    DatabaseMethods().uploadFemaleTrainerProfile(uid, File(pickedFile.path));
+  }
+
   @override
   Widget build(BuildContext context) {
     var uid = Provider.of<User>(context).uid;
     var uidd = Provider.of<User>(context).uidd;
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     CollectionReference reff = Firestore.instance
-        .collection('users')
-        .document(uid)
         .collection('femaleTrainers');
-
     // DocumentReference refff = Firestore.instance
     // .collection('users')
     // .document(uid)
@@ -189,6 +225,41 @@ class _TrainersForm3State extends State<TrainersForm3> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
+                              'Choose your profile photo first :-',
+                              style: GoogleFonts.rubik(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            Center(
+                              child: CircleAvatar(
+                                  radius: 50.0,
+                                  backgroundImage: imageFile == null
+                                      ? AssetImage('assets/apple.png')
+                                      : FileImage(File(imageFile.path))
+                                // NetworkImage(
+                                //     _imageFile.toString()), //(iska matlab yeh hain ki background image selected profile photo rahega gallery se liya hua and if voh nhi hua na toh normal default image rahega search.png valaa)
+                              ),
+                            ),
+                            Container(
+                              child: InkWell(
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.teal,
+                                  size: 28.0,
+                                ),
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: ((builder) => bottomSheet(uid,uidd)),
+                                  );
+                                },
+                              ),
+                              alignment: Alignment(0.015, 0.0),
+                            ),
+                            SizedBox(height: 20,),
+                            Text(
                               'Experience',
                               style: GoogleFonts.rubik(
                                 fontWeight: FontWeight.w500,
@@ -250,6 +321,7 @@ class _TrainersForm3State extends State<TrainersForm3> {
                                 //     certificateSelectedYear,
                                 // 'Achievements' : achievements.text.toString(),
                                 'Experience': femaleExperience.toString(),
+                                'profile_pic_url_tf': DatabaseMethods.urllll.toString(),
                               };
                               // if(selectedGender != 'Female'){
                               //   // db.addTrainerMaleInfo({
@@ -305,7 +377,7 @@ class _TrainersForm3State extends State<TrainersForm3> {
                               //         return TrainersForm3();
                               //       }));
                               // }
-                              if(widget.selectedGender != null){
+                              if(DatabaseMethods.urlll != null){
                                 // db.addTrainerFemaleInfo({
                                 //   'Experience': femaleExperience.toString(),
                                 // }, uid, uidd);
@@ -327,7 +399,8 @@ class _TrainersForm3State extends State<TrainersForm3> {
                                          ' ' +
                                          widget.certificateSelectedYear,
                                      'Achievements' : widget.achievements.text.toString(),
-                                     'Experience' : femaleExperience.toString()
+                                     'Experience' : femaleExperience.toString(),
+                                     'profile_pic_url_tf': DatabaseMethods.urllll.toString(),
                                    }).whenComplete(() => print('hogaya firebase mein female ka data update'));
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
@@ -342,7 +415,12 @@ class _TrainersForm3State extends State<TrainersForm3> {
                               //print(credentials.userId);
 
                             }else{
-                              Center(child: Text('some error happened, kindly resend the form'),);
+                              Fluttertoast.showToast(
+                                msg: 'some error happened, kindly resend the form, Also check the profile picture',
+                                backgroundColor: Colors.deepPurple[400],
+                                textColor: Colors.black,
+                                toastLength: Toast.LENGTH_LONG,
+                              );
                             }
                           },
                           child: Container(

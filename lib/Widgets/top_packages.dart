@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TopMealTile extends StatelessWidget {
+class TopPackageTile extends StatelessWidget {
   final Color color;
   final String title;
   final String assetPath;
   final String details;
 
-  const TopMealTile (
+  const TopPackageTile (
       {Key key, this.color, this.title, this.assetPath, this.details})
       : super(key: key);
 
@@ -50,11 +50,10 @@ class TopMealTile extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: Colors.black38),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
-          ),
-
           // Positioned(
           //   right: 0,
           //   child: Container(

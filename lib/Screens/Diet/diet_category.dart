@@ -1,7 +1,4 @@
 import 'diet_item.dart';
-
-
-
 // class Category {
 //   final int id;
 //   final String name;
